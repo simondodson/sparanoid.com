@@ -6,7 +6,7 @@
   "homepage": "https://sparanoid.com/",
   "main": "Gruntfile.coffee",
   "scripts": {
-    "test": "grunt test"
+     "test": "grunt test"
   },
   "repository": {
     "type": "git",
