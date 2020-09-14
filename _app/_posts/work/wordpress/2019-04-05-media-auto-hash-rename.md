@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Media Auto Hash Rename
+title: goodpizza.com.au
 category: work
-tag: wordpress
+tag: seo
 excerpt: A WordPress plugin that renames media filename during upload with unique hash.
 thumbnail: thumb/media-auto-hash-rename.png
 heading-img: svg/media-auto-hash-rename.svg
