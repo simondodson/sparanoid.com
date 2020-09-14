@@ -16,7 +16,7 @@ exclude:        []
 dev:            true
 
 # Reset base to / for localhost development
-baseurl:        "https://digitalauthority.com.au/"
+baseurl:        https://digitalauthority.com.au
 
 # CDN location for development
-file:           
+file:          https://s3.amazonaws.com/sparanoid    
