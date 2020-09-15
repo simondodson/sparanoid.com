@@ -5,7 +5,9 @@ permalink: /about/
 desc: 關於・について・Introduction
 ---
 
-Sparanoid is a design studio operated by Tunghsiao Liu. He is available for freelance design work as well as consulting. You can send email to [t@sparanoid.com](mailto:t@sparanoid.com) or ping him on [Twitter](https://twitter.com/tunghsiao).
+-SIMONDODSON: I am a digital executive currently living in Bangkok with extensive publishing, digital,  syndication, transformation specialist complimented upon scaled omni channel network level layered silo business unit audience segmentation, automation schemitacts and marketing technology on tool real world relevant technician.
+
+Having worked with some of the world’s largest brands, publishers, networks, lead generators, for over 20 years on the job experience that provides a unique visibility your business may find useful. 
 
 ## Colophon
 
