@@ -61,7 +61,7 @@ plugins:
 # need to change it.
 #
 # Default:      false
-dev:            false
+dev:            true
 
 # Site name
 #
@@ -82,7 +82,7 @@ name:           digital authority
 # - name_short: Sparanoid
 #
 # Default:      AMSF
-name_short:     digital conultant
+name_short:     digital consultant
 
 # Site description
 #
@@ -99,7 +99,7 @@ description:    Digital Authority guide cultural, organizational and operational
 # `/my-project`, without trailing slash.
 #
 # Default:      ""
-baseurl:        ""
+baseurl:        "https://digitalauthority.com.au/"
 
 # Flatten base
 #
@@ -129,7 +129,7 @@ feed:           /feed.xml
 # URLs for these fields
 #
 # Default:      https://sparanoid.com
-url:           https://digitalauthority.com.au/
+url:           https://digitalauthority.com.au
 
 # Media assets URL
 #
@@ -198,7 +198,7 @@ force_utf_8:    true
 # basically change your <link> value to external link you defined in your posts)
 #
 # Default:      false
-link_blog:      false
+link_blog:      true
 
 # Excerpts for RSS
 #
