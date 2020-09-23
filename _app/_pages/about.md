@@ -19,4 +19,4 @@ Having worked with some of the world’s largest brands, publishers, networks, l
 [CloudFront](https://aws.amazon.com/cloudfront/) -
 [Textmate](https://macromates.com/)
 
-All posts are &copy; Sparanoid, Inc., all rights reserved.
+All posts are &copy; simondodson.com, Inc., all rights reserved.
