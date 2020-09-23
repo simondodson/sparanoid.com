@@ -61,7 +61,7 @@ plugins:
 # need to change it.
 #
 # Default:      false
-dev:            true
+dev:            false
 
 # Site name
 #
