@@ -1,0 +1,1698 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>digital authority</title><subtitle>Digital Authority guide cultural, organizational and operational change of your legacy ecosystem through a smart integration of digital technologies, workflow, automation enhancing bottom line.</subtitle><updated>2020-09-15T04:34:13+08:00</updated><id>https://digitalauthority.com.au//</id><rights>Copyright © 2020, digital</rights><link rel="alternate" type="text/html" hreflang="en" href="https://digitalauthority.com.au//" /><link rel="self" type="application/atom+xml" href="https://digitalauthority.com.au//feed-note.xml" /><author><name>digital</name><uri>https://digitalauthority.com.au//</uri><email>simon@rite.io</email></author><entry><title>CSS Variables Guide: Color Manipulation and Dark Mode</title><id>https://digitalauthority.com.au//note/css-variables-guide/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/css-variables-guide/" /><published>2019-10-14T00:00:00+08:00</published><updated>2019-10-15T11:54:40+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Follow this guide, you will:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Learn why use HSLa over HEX/RGB for better color manipulation&lt;/li&gt;
+  &lt;li&gt;Create dark mode for your app/website with CSS variables (custom properties) in a pleasant way&lt;/li&gt;
+  &lt;li&gt;How to migrate from spreading colors all over your stylesheets to a unified, reactive color system&lt;/li&gt;
+  &lt;li&gt;Easily extend your theme to “darker” mode, “pinky” mode, or any color tint you want&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;lets-embrace-hsla-color-model&quot;&gt;Let’s embrace HSLa color model&lt;/h2&gt;
+
+&lt;p&gt;First, before I get started to create dark mode for my site, I deprecated all HEX and RGBa (ARGB) models with &lt;a href=&quot;https://en.wikipedia.org/wiki/HSL_and_HSV&quot;&gt;HSLa&lt;/a&gt;. Why? The real appeal of the HSLa model is it’s more intuitive, straightforward for humans to know what the color will be like when you change the H (hue), S (saturation), and L (lightness) values. Remember HEX or RGB colors? Will you tell &lt;code class=&quot;highlighter-rouge&quot;&gt;#6495ed&lt;/code&gt; is cornflower blue? &lt;code class=&quot;highlighter-rouge&quot;&gt;rgb(75, 0, 130)&lt;/code&gt; represents indigo? Are they light or dark colors? Their saturation? No, but HSLa will.&lt;/p&gt;
+
+&lt;h2 id=&quot;introducing-root-variables&quot;&gt;Introducing Root Variables&lt;/h2&gt;
+
+&lt;p&gt;Based on the HSLa model, I created a minimal, future-proof &lt;a href=&quot;https://caniuse.com/#feat=css-variables&quot;&gt;CSS variables&lt;/a&gt; framework based on HSLa. &lt;a href=&quot;https://sparanoid.com/lab/root-variables/&quot;&gt;Root Variables&lt;/a&gt;; it is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Minimal variables defined: colors, typography, and layout helpers.&lt;/li&gt;
+  &lt;li&gt;HSL colors: all colors are HSL-based for more straightforward manipulation (before we have CSS Color Module Level 4 in hands).&lt;/li&gt;
+  &lt;li&gt;Flexible to extend: all variables can be overridden later in &lt;code class=&quot;highlighter-rouge&quot;&gt;:root&lt;/code&gt; or in specific scopes.&lt;/li&gt;
+  &lt;li&gt;Dark mode ready: extend your existing app with &lt;code class=&quot;highlighter-rouge&quot;&gt;prefers-color-scheme: dark&lt;/code&gt;, tweak colors with HSL, and you’re ready to go.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This framework starts with 4 main color templates cover most of the color using on a page:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--text-color&lt;/code&gt; for the main text. A generally dark color on a white page when the color scheme is light&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--link-color&lt;/code&gt; for hyperlinks. A vivid color compared to general text&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--bg-color&lt;/code&gt; for the page background. A white color by default&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--code-color&lt;/code&gt; for monospace code text. Just an alternative color with slightly adjusted hue compared to link color&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you look at the source code you will know how it works. Take the link color as an example:&lt;/p&gt;
+
+&lt;p&gt;I first define the color using HSL color space in native CSS custom properties (aka. CSS variables). This can help me change the value of it or manipulate it using CSS &lt;code class=&quot;highlighter-rouge&quot;&gt;calc()&lt;/code&gt; function later:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;211&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Since I have all the values HSL needs I can combine them into one variable:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then I can create more variables based on this HSL variable:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.05&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You get it? this creates “variable chains” — when &lt;code class=&quot;highlighter-rouge&quot;&gt;--link-color-h&lt;/code&gt; updates; it will also updates &lt;code class=&quot;highlighter-rouge&quot;&gt;--link-color-hsl&lt;/code&gt;. All colors based on these variables will also be updated automatically. It works more like traditional CSS preprocessors like Less and Sass, but it’s executed in the browser without compiling thanks to CSS variables.&lt;/p&gt;
+
+&lt;p&gt;With this technique you can create more complex color variables with your imagination:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-light&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-dark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* just inverted from link-color's hue */&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--code-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;create-your-own-themes&quot;&gt;Create your own themes&lt;/h2&gt;
+
+&lt;p&gt;The Root Variables framework is just too easy to use. You can just import it in your app and play around with the colors in your browser inspector to see how it works. If you like you can also create your own root variables based on this technique.&lt;/p&gt;
+
+&lt;p&gt;To make things simple, I’ll continue with the Root Variables conventions for the dark mode guide.&lt;/p&gt;
+
+&lt;p&gt;After importing the Root Variables you will get several CSS variables in your &lt;code class=&quot;highlighter-rouge&quot;&gt;:root&lt;/code&gt;. You can override them later in any CSS files, and the best practice is defining them in &lt;code class=&quot;highlighter-rouge&quot;&gt;:root&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;body&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;/* app.css */&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;/* Override default color scheme */&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--text-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--bg-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--bg-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;80%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With the benefits of HSL color mode I can easily tweak the colors without using any visual color picker. I can open the browser inspector and change them to see color updates automatically.&lt;/p&gt;
+
+&lt;p&gt;That’s all, I just created a new theme with lighter text, more bluish links, and a blush background.&lt;/p&gt;
+
+&lt;h2 id=&quot;welcome-to-the-variables-world&quot;&gt;Welcome to the variables world!&lt;/h2&gt;
+
+&lt;p&gt;Now preparing for the dark mode. You need to migrate all colors in your CSS with varibles you defined:&lt;/p&gt;
+
+&lt;div class=&quot;language-diff highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;a {
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;- color: #6495ed;
+&lt;/span&gt;&lt;span class=&quot;gi&quot;&gt;+ color: var(--link-color);
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;a:hover {
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;- color: #6495ed;
+&lt;/span&gt;&lt;span class=&quot;gi&quot;&gt;+ color: var(--link-color-dark);
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;hr {
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;- border-top-color: #e3e1ea;
+&lt;/span&gt;&lt;span class=&quot;gi&quot;&gt;+ border-top-color: var(--text-color-10);
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also create variables based on usage for more semantic:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--text-color-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--btn-hover&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;--link-color-dark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This can be hard at the beginning, but when you’ve done this step you’re really close to the dark mode.&lt;/p&gt;
+
+&lt;h2 id=&quot;let-the-magic-happen&quot;&gt;Let the magic happen&lt;/h2&gt;
+
+&lt;p&gt;This is the final step for dark mode. Now you’re smart enough to realize that dark mode is just another theme for specific devices that support it. You already know how to create a theme based on Root Variables, then you know how to create another theme for dark mode:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;/* Dark mode, that's all we need. */&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--text-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--text-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;70%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;70%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--bg-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--bg-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let me explain:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set text color’s saturation lower to 10% that will be pleasant for your eyes.&lt;/li&gt;
+  &lt;li&gt;I’m creating a “white text with black background” style so make text color lighter to 70% lightness.&lt;/li&gt;
+  &lt;li&gt;The lightness of links could also match the text color. Set it to 70%, too.&lt;/li&gt;
+  &lt;li&gt;Turn off the light for the background color, so make the lightness of it to 7%.&lt;/li&gt;
+  &lt;li&gt;The background shouldn’t be too vivid, so set the saturation to 10%.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can copy and paste the above snippet to Root Variables demo to see how it works.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s make magic happen: wrap them in &lt;code class=&quot;highlighter-rouge&quot;&gt;prefers-color-scheme: dark&lt;/code&gt; media query, followed by your original variable overrides:&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;/* app.css */&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;/* Override default color scheme */&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--text-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--link-color-h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--bg-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;--bg-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;80%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefers-color-scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nd&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;--text-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;--text-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;70%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;--link-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;70%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;--bg-color-l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;py&quot;&gt;--bg-color-s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s all you need for dark mode! All your buttons, text, links, borders, input, modals, dropdowns, and etc. that you migrated from normal colors to variables will now update automatically when &lt;code class=&quot;highlighter-rouge&quot;&gt;prefers-color-scheme: dark&lt;/code&gt; is true for supported devices.&lt;/p&gt;
+
+&lt;h2 id=&quot;further-reading&quot;&gt;Further reading&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sparanoid.com/lab/root-variables/&quot;&gt;Root Variables&lt;/a&gt; - The initial project&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sparanoid.com/lab/amsf/&quot;&gt;Almace Scaffolding&lt;/a&gt; - Dark mode demo&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sparanoid.com/lab/opentype-features/&quot;&gt;OpenType Features in CSS&lt;/a&gt; - Custom AMSF dark mode demo&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hyper.ai/&quot;&gt;Hyper.AI&lt;/a&gt; - 3 color schemes all with dark mode support. Related stylesheets for dark mode less than 50 lines.&lt;/li&gt;
+&lt;/ul&gt;
+
+          
+          
+        
+      
+        </content><summary>Follow this guide, you will:</summary></entry><entry><title>URL-Based CSP for AWS Lambda</title><id>https://digitalauthority.com.au//note/url-based-csp-aws-lambda/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/url-based-csp-aws-lambda/" /><published>2018-08-27T00:00:00+08:00</published><updated>2018-09-23T17:40:42+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;If you followed my &lt;a href=&quot;/note/cloudfront-hsts/&quot;&gt;last post&lt;/a&gt; you would know you can set HSTS headers via AWS Lambda, this time let me show you how to add Content Security Policy (CSP), Expect-CT, and other security headers based on URLs that clients request, and only for &lt;code class=&quot;highlighter-rouge&quot;&gt;text/html&lt;/code&gt; content type.&lt;/p&gt;
+
+&lt;p&gt;I’ll modify the production code built from my last post. This time you need to catch the request URL:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you can add Content Security Policy headers based on URLs:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// We only need these headers for `text/html` requests.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;content-type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;includes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;text/html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;expect-ct&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Expect-CT&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;max-age=604800&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;referrer-policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Referrer-Policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;strict-origin-when-cross-origin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;feature-policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Feature-Policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;camera 'none'; geolocation 'self'; usb 'none'&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// Exclude all /lab content&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/lab&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;content-security-policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Content-Security-Policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;default-src 'self';&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// Target /lab/7z&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/lab/7z&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;content-security-policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Content-Security-Policy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' www.7-zip.org;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Bonus: you can do many things on Lambda, like fixing wrong &lt;code class=&quot;highlighter-rouge&quot;&gt;content-type&lt;/code&gt; sent by CloudFront:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;content-type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// ...other stuff here&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// Fix wrong MIME headers for woff2&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.woff2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;content-type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Content-Type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;application/font-woff2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Additional loot: You’d better test your code with AWS Lambda builtin test events. Or you may break your site with these security headers.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>If you followed my last post you would know you can set HSTS headers via AWS Lambda, this time let me show you how to add Content Security Policy (CSP), Expect-CT, and other security headers based on URLs that clients request, and only for text/html content type.</summary></entry><entry><title>HSTS for Amazon CloudFront</title><id>https://digitalauthority.com.au//note/cloudfront-hsts/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/cloudfront-hsts/" /><published>2017-11-13T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;As we know Amazon CloudFront doesn’t support HSTS (HTTP Strict Transport Security) headers. If you tried adding it via CLI or web console, it will be prefixed with &lt;code class=&quot;highlighter-rouge&quot;&gt;x-amz-&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But today we’re now able to use AWS &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html&quot;&gt;Lambda@Edge&lt;/a&gt; to execute functions that customize the content that is delivered through CloudFront.&lt;/p&gt;
+
+&lt;p&gt;You can access AWS Lambda via its web console, then create (author) a function from scratch, create a new role from template Basic Edge Lambda permissions, then use the following code:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;handler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;strict-transport-security&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Strict-Transport-Security&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;max-age=31536000; includeSubdomains; preload&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The above code snippet is straightforward: simply add the &lt;code class=&quot;highlighter-rouge&quot;&gt;Strict-Transport-Security&lt;/code&gt; we need and return the modified header to edge nodes. Then you can publish a new version, create a CloudFront trigger using Distribution ID for the distribution you want to apply this header. Make sure to select &lt;code class=&quot;highlighter-rouge&quot;&gt;Origin Response&lt;/code&gt; for your Lambda function to listen for.&lt;/p&gt;
+
+&lt;p&gt;Once this is submitted new headers will take effect as expected:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt; https://sparanoid.com/
+HTTP/1.1 200 OK
+Content-Type: text/html&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;utf-8
+Content-Length: 6816
+Connection: keep-alive
+Strict-Transport-Security: max-age&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;31536000&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; includeSubdomains&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; preload
+Age: 9128
+Cache-Control: public, max-age&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1800, immutable
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Updated Mar 21, 2018: Now Amazon Web Services has an official documentation for this feature: &lt;a href=&quot;https://aws.amazon.com/blogs/networking-and-content-delivery/adding-http-security-headers-using-lambdaedge-and-amazon-cloudfront/&quot;&gt;Adding HTTP Security Headers Using Lambda@Edge and Amazon CloudFront
+&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>As we know Amazon CloudFront doesn’t support HSTS (HTTP Strict Transport Security) headers. If you tried adding it via CLI or web console, it will be prefixed with x-amz-.</summary></entry><entry><title>DMARC</title><id>https://digitalauthority.com.au//note/dmarc/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/dmarc/" /><published>2015-12-27T00:00:00+08:00</published><updated>2016-12-24T11:35:05+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;https://dmarc.org/&quot;&gt;DMARC&lt;/a&gt; (Domain-based Message Authentication, Reporting &amp;amp; Conformance) is a greatest advance in email authentication. DMARC can help you monitor fraudulent or spoofing emails from untrusted sources, or even block these spam before it reaches the inbox (spam box).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://postmarkapp.com/&quot;&gt;Postmark&lt;/a&gt; provides a &lt;a href=&quot;https://dmarc.postmarkapp.com/&quot;&gt;DMARC analytics service&lt;/a&gt; which will send you a weekly report digest about emails sending from your domain.&lt;/p&gt;
+
+&lt;p&gt;After setting up DMARC record, you can use the following command to verify your record:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dig +short _dmarc.sparanoid.com txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you can send fake emails to test if your DMARC record works:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;Authentication-Results:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mx.google.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;spf=softfail&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(google.com:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;transitioning&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;t@sparanoid.com&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;designate&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.34.56.78&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permitted&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sender)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smtp.mailfrom=t@sparanoid.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;dmarc=fail&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(p=NONE&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dis=NONE)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;header.from=sparanoid.com&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When you set &lt;code class=&quot;highlighter-rouge&quot;&gt;p=quarantine&lt;/code&gt; in your DMARC record your fake emails would be marked as spam:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;Authentication-Results:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mx.google.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;spf=softfail&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(google.com:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;transitioning&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;t@sparanoid.com&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;does&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;designate&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.34.56.78&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permitted&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sender)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smtp.mailfrom=t@sparanoid.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;dmarc=fail&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(p=QUARANTINE&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dis=QUARANTINE)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;header.from=sparanoid.com&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And you will get the following warning in Gmail web app:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Why is this message in Spam?&lt;/strong&gt; It has a from address in sparanoid.com but has failed sparanoid.com’s required tests for authentication.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can also set &lt;code class=&quot;highlighter-rouge&quot;&gt;p=reject&lt;/code&gt; to delete the message even before it reaches the user’s inbox. All emails fail the DMARC authentication will be rejected and never reach the inbox or spam box.&lt;/p&gt;
+
+&lt;p&gt;If everything goes well you should get the all-pass result, a test email sent from Postmark:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;Authentication-Results:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mx.google.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;spf=pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(google.com:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pm_bounces@dmarc.sparanoid.com&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;designates&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.34.56.78&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permitted&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sender)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smtp.mailfrom=pm_bounces@dmarc.sparanoid.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;dkim=pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;header.i=@sparanoid.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;dmarc=pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(p=QUARANTINE&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dis=NONE)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;header.from=sparanoid.com&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can read more information about DMARC at &lt;a href=&quot;https://dmarc.org/&quot;&gt;dmarc.org&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>DMARC (Domain-based Message Authentication, Reporting &amp;amp; Conformance) is a greatest advance in email authentication. DMARC can help you monitor fraudulent or spoofing emails from untrusted sources, or even block these spam before it reaches the inbox (spam box).</summary></entry><entry><title>HTTP/2 and ECDSA Cipher Suites</title><id>https://digitalauthority.com.au//note/http2-and-ecdsa-cipher-suites/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/http2-and-ecdsa-cipher-suites/" /><published>2015-10-16T00:00:00+08:00</published><updated>2018-09-23T17:40:42+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;If you’re using an ECC certificate with HTTP/2, you may get the following error from Google Chrome:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ERR_SPDY_INADEQUATE_TRANSPORT_SECURITY
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you googled about it you will finally find the following HTTP/2 requirements:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A deployment of HTTP/2 over TLS 1.2 SHOULD NOT use any of the cipher suites that are listed in the cipher suite black list (&lt;a href=&quot;https://http2.github.io/http2-spec/#BadCipherSuites&quot;&gt;Appendix A&lt;/a&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;and…&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The black list includes the cipher suite that TLS 1.2 makes mandatory, which means that TLS 1.2 deployments could have non-intersecting sets of permitted cipher suites. To avoid this problem causing TLS handshake failures, deployments of HTTP/2 that use TLS 1.2 MUST support &lt;code class=&quot;highlighter-rouge&quot;&gt;TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256&lt;/code&gt; [&lt;a href=&quot;https://http2.github.io/http2-spec/#TLS-ECDHE&quot;&gt;TLS-ECDHE&lt;/a&gt;] with the P-256 elliptic curve [&lt;a href=&quot;https://http2.github.io/http2-spec/#FIPS186&quot;&gt;FIPS186&lt;/a&gt;].&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So you need the following cipher suite at the beginning of your suites:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ssl_ciphers&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ECDHE-RSA-AES128-GCM-SHA256&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In my case if you’re using an ECC certificate you will need:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ssl_ciphers&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ECDHE-ECDSA-AES128-GCM-SHA256&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;According to the specs:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note that clients might advertise support of cipher suites that are on the black list in order to allow for connection to servers that do not support HTTP/2. This allows servers to select HTTP/1.1 with a cipher suite that is on the HTTP/2 black list. However, this can result in HTTP/2 being negotiated with a black-listed cipher suite if the application protocol and cipher suite are independently selected.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can use black-listed cipher suites for backward compatibility.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>If you’re using an ECC certificate with HTTP/2, you may get the following error from Google Chrome:</summary></entry><entry><title>Public Key Pinning / HPKP Reporting</title><id>https://digitalauthority.com.au//note/public-key-pinning-and-hpkp-reporting/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/public-key-pinning-and-hpkp-reporting/" /><published>2015-09-16T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;(HTTP) Public Key Pinning (HPKP) allows websites to send an HTTP header instructing the browser to remember (or “pin”) parts of its SSL certificate chain. The browser will then refuse subsequent connections that don’t match the pins that it has previously received.&lt;/p&gt;
+
+&lt;p&gt;As of September of 2015, both Google Chrome and Mozilla Firefox of any modern platforms support HTTP Public Key Pinning &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. And Google Chrome supports HPKP reporting from the version 46 &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-pin-hashes&quot;&gt;Creating Pin Hashes&lt;/h2&gt;
+
+&lt;p&gt;Things you should know:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The most secure public key to pin is your own site certificate key. But you should really take care of revoking or replacing certificate before the &lt;code class=&quot;highlighter-rouge&quot;&gt;max-age&lt;/code&gt; you defined expires.&lt;/li&gt;
+  &lt;li&gt;A simpler but less secure way is to use the first intermediate certificate from issued CA.&lt;/li&gt;
+  &lt;li&gt;You must have two &lt;code class=&quot;highlighter-rouge&quot;&gt;pin-sha256&lt;/code&gt; hashes according to the RFC. The first one of the hashes should be valid and matched your current certificate, the second should be the hash of your backup certificate which &lt;strong&gt;should not&lt;/strong&gt; be in your current certificate chain. That means even a fake pin would work in this scenario.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s pin site certificate key for better security:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl rsa &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; my.key &lt;span class=&quot;nt&quot;&gt;-outform&lt;/span&gt; der &lt;span class=&quot;nt&quot;&gt;-pubout&lt;/span&gt; | openssl dgst &lt;span class=&quot;nt&quot;&gt;-sha256&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-binary&lt;/span&gt; | openssl enc &lt;span class=&quot;nt&quot;&gt;-base64&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If signed via ECDSA (i.e. COMODO ECC):&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl ec &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; my.key &lt;span class=&quot;nt&quot;&gt;-outform&lt;/span&gt; der &lt;span class=&quot;nt&quot;&gt;-pubout&lt;/span&gt; | openssl dgst &lt;span class=&quot;nt&quot;&gt;-sha256&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-binary&lt;/span&gt; | openssl enc &lt;span class=&quot;nt&quot;&gt;-base64&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;adding-header-for-nginx&quot;&gt;Adding Header for Nginx&lt;/h2&gt;
+
+&lt;p&gt;Once you got the pins add the following line to Nginx:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;add_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Public-Key-Pins&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'pin-sha256=&quot;ABCD&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;pin-sha256=&quot;EFGI&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;max-age=86400'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;test-hpkp&quot;&gt;Test HPKP&lt;/h2&gt;
+
+&lt;p&gt;If everything is right, you can get the result from &lt;code class=&quot;highlighter-rouge&quot;&gt;chrome://net-internals/#hsts&lt;/code&gt; in Google Chrome:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;dynamic_sts_domain&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ci.sparanoid.com&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;dynamic_upgrade_mode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;STRICT&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;dynamic_sts_include_subdomains&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;dynamic_sts_observed&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1443522549.33342&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;dynamic_pkp_domain&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ci.sparanoid.com&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;dynamic_pkp_include_subdomains&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;dynamic_pkp_observed&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1443522549.333427&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;dynamic_spki_hashes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sha256/6X0iNAQtPIjXKEVcqZBwyMcRwq1yW60549axatu3oDE=,sha256/klO23nT2ehFDXCfx3eHTDRESMz3asj1muO+4aIdjiuY=&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also see if Public Key Pinning is enabled from Web Inspector in Mozilla Firefox.&lt;/p&gt;
+
+&lt;h2 id=&quot;hpkp-reporting&quot;&gt;HPKP Reporting&lt;/h2&gt;
+
+&lt;p&gt;At the time of writing, Google Chrome already supports HPKP reporting, so can test it with a report-only header and a fake primary pin, I recommend &lt;a href=&quot;https://report-uri.com/&quot;&gt;Report URI&lt;/a&gt; or &lt;a href=&quot;https://requestbin.com/&quot;&gt;RequestBin&lt;/a&gt; for collecting requests:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;add_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Public-Key-Pins-Report-Only&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'pin-sha256=&quot;FAKE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;pin-sha256=&quot;EFGI&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;max-age=86400&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;report-uri=&quot;https://get.report-uri.com/r/d/hpkp/reportOnly&quot;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;max-age-best-practice&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;max-age&lt;/code&gt; Best Practice&lt;/h2&gt;
+
+&lt;p&gt;According to RFC:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;As mentioned in Section 2.3.3, UAs MAY cap the max-age value at some upper limit.  There is a security trade-off in that low maximum values provide a narrow window of protection for users who visit the Known Pinned Host only infrequently, while high maximum values might result in a UA’s inability to successfully perform Pin Validation for a Known Pinned Host if the UA’s noted Pins and the host’s true Pins diverge.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;See “Browser compatibility” section – &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning&quot;&gt;Public Key Pinning - MDN&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;HPKP reporting, shipping in Chrome 46, is a feature that you can use to detect misconfigurations as you’re rolling out HPKP. – &lt;a href=&quot;https://developers.google.com/web/updates/2015/09/HPKP-reporting-with-chrome-46&quot;&gt;Rolling out Public Key Pinning with HPKP Reporting — Google Web Updates&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+          
+          
+        
+      
+        </content><summary>(HTTP) Public Key Pinning (HPKP) allows websites to send an HTTP header instructing the browser to remember (or “pin”) parts of its SSL certificate chain. The browser will then refuse subsequent connections that don’t match the pins that it has previously received.</summary></entry><entry><title>CloudFront Cost Control</title><id>https://digitalauthority.com.au//note/cloudfront-cost-control/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/cloudfront-cost-control/" /><published>2015-08-30T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;If you’re using CloudFront to serve your website, here’s some tips that can help reduce the cost.&lt;/p&gt;
+
+&lt;p&gt;Here’s a output sample of my deploy script:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;info] Deploying /Sites/sparanoid.com/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; to sparanoid.com
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Updated lab/amsf/assets/css/app.css
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Updated lab/amsf/assets/js/custom.js
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Updated lab/amsf/assets/themes/curtana/js/intense.js
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Invalidated 3 items on CloudFront
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;info] Summary: Updated 3 files. Transferred 15.2 kB, 8.0 kB/s.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The invalidation price will be high if you like me, deploy sites via git hooks so every time you deploy sites to CloudFront the invalidation triggers. So here’s a workaround way to avoid invalidation but also refresh caches for users.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;File hashes to the rescue.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Here’s another output sample of optimized deploy script:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;info] Deploying /Sites/sparanoid.com/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; to sparanoid.com
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Deleted lab/amsf/assets/css/app.css
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Deleted lab/amsf/assets/js/custom.js
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Deleted lab/amsf/assets/themes/curtana/js/intense.js
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Created lab/amsf/assets/css/app.17b3a8ad.css
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Created lab/amsf/assets/js/custom.53609257.js
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;succ] Created lab/amsf/assets/themes/curtana/js/intense.5797aa35.js
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;info] Summary: Created 3 files. Deleted 3 files. Transferred 15.2 kB, 8.2 kB/s.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There’s no invalidation anymore, The cost of invalidation requests is first 1,000 paths free, then $0.005 per path. For example if you deploy your sites for client preview, let’s say 20 there’re 10 deploys per day with an average of 20 files (CSS, scripts and images) per deploy, all done automatically via git hooks. You will have 200 invalidations per day. 1000 for five days then you’ll run out of free tier. you have to pay $5 per 1000 request if you continue requesting invalidations.&lt;/p&gt;
+
+&lt;p&gt;So in my &lt;a href=&quot;https://sparanoid.com/lab/amsf/&quot;&gt;current setup&lt;/a&gt;, I use &lt;a href=&quot;https://github.com/hollandben/grunt-cache-bust&quot;&gt;grunt-cache-bust&lt;/a&gt; to hash files. All file references will be updated automatically via Grunt task.&lt;/p&gt;
+
+&lt;h3 id=&quot;update-jun-19-2016&quot;&gt;Update Jun 19, 2016&lt;/h3&gt;
+
+&lt;p&gt;With recent update of AWS CloudFront, you can now use the &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; wildcard to invalidate files. In my case, I can just invalidate the whole distribution on the root with only one invalidation request:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Invalidation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Status&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Completed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;InvalidationBatch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Paths&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Items&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/*&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Quantity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;CallerReference&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;s3_website gem 1466341232813&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;I3CS10X18L9R4R&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;CreateTime&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2016-06-19T13:00:32.999Z&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Compared to:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Invalidation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Status&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Completed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;InvalidationBatch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Paths&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Items&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/feed.json&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/feed.xml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/404.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/markup-example.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/creating-themes.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/getting-started.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/custom-css.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/external-link-post.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/github-pages-setup.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/markdown-features-test.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/theme-curtana.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/multiple-themes-support.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/themes.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/syntax-highlighting.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/news/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/configuration.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/custom-html-markups.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/svg-post-title.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/sitemap.xml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/welcome.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/robots.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/about/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/deployment-methods.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/customizing-styles.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/lab/amsf/custom-color-scheme.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/index.html&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Quantity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;CallerReference&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;s3_website gem 1466264746013&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;I3EAPBBE5NHVC6&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;CreateTime&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2016-06-18T15:45:46.216Z&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;1 vs 27, and according to the &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html&quot;&gt;AWS docs&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The first 1,000 invalidation paths that you submit per month are free; you pay for each invalidation path over 1,000 in a month. An invalidation path can be for a single object (such as &lt;code class=&quot;highlighter-rouge&quot;&gt;/images/logo.jpg&lt;/code&gt;) or for multiple objects (such as &lt;code class=&quot;highlighter-rouge&quot;&gt;/images/*&lt;/code&gt;). A path that includes the &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; wildcard counts as one path even if it causes CloudFront to invalidate thousands of objects.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So this update could dramatically reduce your invalidation cost.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>If you’re using CloudFront to serve your website, here’s some tips that can help reduce the cost.</summary></entry><entry><title>Apple Music Playlists</title><id>https://digitalauthority.com.au//note/apple-music-playlists/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/apple-music-playlists/" /><published>2015-08-21T00:00:00+08:00</published><updated>2015-08-22T21:20:31+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Here’s my custom hand-picked Apple Music playlists! More coming soon.&lt;/p&gt;
+
+&lt;h2 id=&quot;dance-enhanced&quot;&gt;Dance Enhanced&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://itunes.apple.com/us/playlist/dance-enhanced/idpl.7e3a1111376b420d91f3764f556783e6&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/apple-music-playlist-dance-enhanced.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A curated list of awesome dance music for coding and doing workout.&lt;/p&gt;
+
+&lt;h2 id=&quot;ダンス-エンハンスト&quot;&gt;ダンス エンハンスト&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/apple-music-playlist-dance-enhanced-ja.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Dance Enhanced Japanese version, not available at the moment…&lt;/p&gt;
+
+&lt;h2 id=&quot;voice-memos&quot;&gt;Voice Memos&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/apple-muisc-playlist-voice-memos.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;My personal voice memos, not public available of course. One interesting thing is that the cover got overridden every time I update memos from my iPhone.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Here’s my custom hand-picked Apple Music playlists! More coming soon.</summary></entry><entry><title>Ansible Advanced lineinfile</title><id>https://digitalauthority.com.au//note/ansible-advanced-lineinfile/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/ansible-advanced-lineinfile/" /><published>2015-08-16T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;/note/ansible/&quot;&gt;Ansible is great&lt;/a&gt;, it’s really simple to setup and easy to use. There are still some hidden tricks that can make your workflow more efficient.&lt;/p&gt;
+
+&lt;p&gt;I was setting up new machines with PHP-FPM support. I’d like to change several FPM parameters using Ansible, you can copy (transfer) the whole configurations from your Ansible task to remote machines via &lt;code class=&quot;highlighter-rouge&quot;&gt;synchronize&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;template&lt;/code&gt;, it’s fast but you can’t handle config changes from program updates. So my idea is dynamically replace the parameters I want to change via &lt;code class=&quot;highlighter-rouge&quot;&gt;lineinfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;After googling around, I found &lt;a href=&quot;https://stackoverflow.com/a/24345892/412385&quot;&gt;this answer by Ben Whaley&lt;/a&gt; fit the bill:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Set some kernel parameters&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;lineinfile&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/etc/sysctl.conf&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;regexp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.regexp&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.line&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with_items&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;regexp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;^kernel.shmall'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;kernel.shmall&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;2097152'&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;regexp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;^kernel.shmmax'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;kernel.shmmax&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;134217728'&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;regexp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;^fs.file-max'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;fs.file-max&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;65536'&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That snippet works but it’s tedious. &lt;code class=&quot;highlighter-rouge&quot;&gt;regexp&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;line&lt;/code&gt; has the duplicated parameter key names, let’s clean up the code:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;set PHP-FPM parameters&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;lineinfile&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/etc/php-fpm.conf&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;regexp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;^{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.param&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;insertafter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;^;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.param&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.param&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.value&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with_items&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;error_log'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/var/log/php-fpm/error.log'&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;log_level'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;error'&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;emergency_restart_threshold'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;10'&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Everything works fine untill I meet the following config:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;php_value[session.save_handler]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'files'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I can’t target keys like this with previous &lt;code class=&quot;highlighter-rouge&quot;&gt;regexp&lt;/code&gt;, and cannot match square brackets directly or Ansible will fall running this task. So I have to escape speciall characters:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;set PHP-FPM pool parameters&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;lineinfile&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/etc/php-fpm.d/www.conf&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;regexp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;^{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.param|replace(&quot;[&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\[&quot;)|replace(&quot;]&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\]&quot;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*?='&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;insertafter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;^;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.param|replace(&quot;[&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\[&quot;)|replace(&quot;]&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\]&quot;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*?='&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.param&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item.value&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;}}&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with_items&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;php_value[session.save_handler]'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;memcache'&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Cool for the summer.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Ansible is great, it’s really simple to setup and easy to use. There are still some hidden tricks that can make your workflow more efficient.</summary></entry><entry><title>Ansible</title><id>https://digitalauthority.com.au//note/ansible/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/ansible/" /><published>2015-05-19T00:00:00+08:00</published><updated>2015-08-17T14:55:31+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;I’ve been looking for a simple way to handle my servers with a centralized management tool for a long time. I’ve tried Chef, Puppet, Salt, and Ansible, and finally I chose Ansible, here’s why:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;YAML-based syntax and configuration templates, really easy to set up and get running&lt;/li&gt;
+  &lt;li&gt;No slaves (agents) requred on managed servers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m not a pro DevOps or a “full-stack” engineer, so I only need a tool like that that can help me update / install programs, update Nginx configurations, and do other repetitive work. Ansible seems to fit the bill.&lt;/p&gt;
+
+&lt;p&gt;If you have never tried Ansible and don’t know what can be done with it, check out &lt;a href=&quot;https://github.com/sparanoid/ansible-shadowsocks&quot;&gt;my first Ansible Playbook&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>I’ve been looking for a simple way to handle my servers with a centralized management tool for a long time. I’ve tried Chef, Puppet, Salt, and Ansible, and finally I chose Ansible, here’s why:</summary></entry><entry><title>Amazon S3 × CloudFront</title><id>https://digitalauthority.com.au//note/amazon-s3-cloudfront/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/amazon-s3-cloudfront/" /><published>2015-04-27T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Previously this site was hosted on a Linode VPS, handling thousands of requests a day. It’s stable, fast, and has a great support team. But this time I would like to try something new - host my website entirely in the cloud.&lt;/p&gt;
+
+&lt;p&gt;The first cloud provider that came to my mind was Amazon S3 and CloudFront. Back in 2010, I tried this combination with no luck. The web hosting feature of S3 was not as expected, and CloudFront did not support custom domain SSL and the apex (root) domain was also not supported. But now I’m happy to see all these features implemented and so I’m going to try this approach again.&lt;/p&gt;
+
+&lt;p&gt;Please note that this is not a detailed tutorial about how to host your website on Amazon S3 and CloudFront, but my personal notes about setup pitfalls.&lt;/p&gt;
+
+&lt;h3 id=&quot;transfer-everything-to-the-cloud&quot;&gt;Transfer everything to the Cloud?&lt;/h3&gt;
+
+&lt;p&gt;There are two methods you can choose - host static files on Amazon S3 and speed up using CloudFront, or host your website on a remote server using CloudFront as custom origin proxy. Both of these have their pros and cons:&lt;/p&gt;
+
+&lt;p&gt;Amazon S3 + CloudFront means you do not have to buy additional servers to host your website, but you have to do more work to ensure your website behaves the same as before. For example, you cannot use &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed/&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;/feed/index.xml&lt;/code&gt;) as your feed URL because you can set only one Document Index per bucket. If you’re using &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed/&lt;/code&gt; then you have to redirect it to something similar to &lt;code class=&quot;highlighter-rouge&quot;&gt;feed.xml&lt;/code&gt;. Gzip is also not a native feature on S3. You have to compress it manually or use other tools (I will talk about it later).&lt;/p&gt;
+
+&lt;p&gt;Update Dec 19, 2015: Amazon finally added &lt;a href=&quot;https://aws.amazon.com/blogs/aws/new-gzip-compression-support-for-amazon-cloudfront/&quot;&gt;Gzip compression support for CloudFront&lt;/a&gt;. You can now simply turn on this feature in AWS console or via CLI.&lt;/p&gt;
+
+&lt;p&gt;Using Amazon CloudFront with custom origin means you still need servers to store your files. You will have more control with your website, for example, you can use Nginx with complex redirects, your website can be dynamic, and CloudFront works just like a proxy. However, the downside is the cache control which can be tricky. You cannot use invalidation with the existing tools and you have to set separate cache control headers &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s-maxage&lt;/code&gt;&lt;/a&gt; for CloudFront.&lt;/p&gt;
+
+&lt;p&gt;To make things simple, I use Amazon S3 with CloudFront.&lt;/p&gt;
+
+&lt;h3 id=&quot;move-files-to-amazon-s3&quot;&gt;Move files to Amazon S3&lt;/h3&gt;
+
+&lt;p&gt;The easiest way is using &lt;a href=&quot;https://github.com/laurilehmijoki/s3_website&quot;&gt;s3_website&lt;/a&gt;. It can help you handle file headers, invalidations, and redirects.&lt;/p&gt;
+
+&lt;p&gt;Here’s a part of my &lt;code class=&quot;highlighter-rouge&quot;&gt;s3_website.yml&lt;/code&gt; config:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;s3_bucket&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sparanoid.com&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;max_age&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;index.html&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;600&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*.css&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;      &lt;span class=&quot;m&quot;&gt;2592000&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*.js&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;       &lt;span class=&quot;m&quot;&gt;2592000&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*.jpg&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;      &lt;span class=&quot;m&quot;&gt;31536000&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*.woff2&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;    &lt;span class=&quot;m&quot;&gt;31536000&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;          &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also define the files to be ignored:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;exclude_from_upload&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(?:\.(?:DS_Store|bak|config|sql|fla|psd|ai|sketch|ini|log|sh|inc|swp|dist))$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For more information please refer &lt;code class=&quot;highlighter-rouge&quot;&gt;s3_website&lt;/code&gt;’s &lt;a href=&quot;https://github.com/laurilehmijoki/s3_website&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;fixing-wrong-feed-url&quot;&gt;Fixing wrong feed URL&lt;/h3&gt;
+
+&lt;p&gt;As discussed before, you cannot use &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed/&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;/feed/index.xml&lt;/code&gt;) as your feed URL because you can set only one Document Index per bucket. Amazon S3 does not redirect it to a file other than Document Index (i.e. &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;). You have to make a redirect from &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed/&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;/rss/&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;feed.xml&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;rss.xml&lt;/code&gt; that directly points to the file. This is performed by the following two steps:&lt;/p&gt;
+
+&lt;p&gt;First redirect &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed.xml&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;s3_website.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;redirects&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;feed&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;feed.xml&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then redirect &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed/&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;/feed.xml&lt;/code&gt; in AWS web console:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;RoutingRules&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;RoutingRule&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;Condition&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;KeyPrefixEquals&amp;gt;&lt;/span&gt;feed/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/KeyPrefixEquals&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Condition&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;Redirect&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;HostName&amp;gt;&lt;/span&gt;sparanoid.com&lt;span class=&quot;nt&quot;&gt;&amp;lt;/HostName&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;feed.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Redirect&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/RoutingRule&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/RoutingRules&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Update Sep 11, 2015: actually you can define routing rules directly in &lt;code class=&quot;highlighter-rouge&quot;&gt;s3_website.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;routing_rules&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;key_prefix_equals&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;feed/&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;host_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sparanoid.com&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;replace_key_prefix_with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;feed.xml&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;http_redirect_code&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;301&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then run &lt;code class=&quot;highlighter-rouge&quot;&gt;s3_website cfg apply&lt;/code&gt; to update redirects.&lt;/p&gt;
+
+&lt;h3 id=&quot;redirect-www-to-non-www&quot;&gt;Redirect www to non-www&lt;/h3&gt;
+
+&lt;p&gt;You have to create an empty separate S3 bucket and redirect all requests to your root domain. Refer &lt;a href=&quot;https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html#root-domain-walkthrough-s3-tasks&quot;&gt;official documentation&lt;/a&gt;. This can be set under your bucket properties panel.&lt;/p&gt;
+
+&lt;h3 id=&quot;enable-cloudfront&quot;&gt;Enable CloudFront&lt;/h3&gt;
+
+&lt;p&gt;The only thing you should be aware of is that the Origin Domain Name should be pointing to your S3 endpoint and not to the bucket URL.&lt;/p&gt;
+
+&lt;h3 id=&quot;cloudfront--custom-ssl&quot;&gt;CloudFront + Custom SSL&lt;/h3&gt;
+
+&lt;p&gt;Update: As of Jan 21, 2016, you can now use Amazon CloudFront Integrates with AWS Certificate Manager (More like a Let’s Encrypt competitor focused on AWS), which can help you issue, manage, and renew SSL/TLS certificates at no extra cost.&lt;/p&gt;
+
+&lt;p&gt;The following is the deprecated IAM method:&lt;/p&gt;
+
+&lt;p&gt;Amazon has a &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html&quot;&gt;very detailed documentation&lt;/a&gt; about using HTTPS with custom SSL certificates and it’s hard to get the key points. So here’s a brief answer:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws iam upload-server-certificate &lt;span class=&quot;nt&quot;&gt;--server-certificate-name&lt;/span&gt; sparanoid.com &lt;span class=&quot;nt&quot;&gt;--certificate-body&lt;/span&gt; file:///path/cert.crt &lt;span class=&quot;nt&quot;&gt;--private-key&lt;/span&gt; file:///path/private.key.pem &lt;span class=&quot;nt&quot;&gt;--certificate-chain&lt;/span&gt; file:///path/intermediates.chained.crt &lt;span class=&quot;nt&quot;&gt;--path&lt;/span&gt; /cloudfront/prod/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Please note that &lt;code class=&quot;highlighter-rouge&quot;&gt;private-key&lt;/code&gt; should be in PEM format. If you get the following error:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A client error (MalformedCertificate) occurred when calling the UploadServerCertificate operation: Unable to parse certificate. Please ensure the certificate is in PEM format.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Then try:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl rsa &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; private.key &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; private.key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you get the following message, then it must be something wrong with your chained intermediate certificates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A client error (MalformedCertificate) occurred when calling the UploadServerCertificate operation: Unable to validate certificate chain. The certificate chain must start with the immediate signing certificate, followed by any intermediaries in order. The index within the chain of the invalid certificate is: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The fix is simple - you should only chain your intermediate certificates &lt;strong&gt;without&lt;/strong&gt; the domain certificate and this is different with the Nginx &lt;code class=&quot;highlighter-rouge&quot;&gt;ssl_certificate&lt;/code&gt; directive:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;COMODORSADomainValidationSecureServerCA.crt COMODORSAAddTrustCA.crt &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; intermediates.chained.crt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Please also note that all certs should start with &lt;code class=&quot;highlighter-rouge&quot;&gt;file://&lt;/code&gt; protocol if they’re on your local machine.&lt;/p&gt;
+
+&lt;p&gt;If everything is right you will get the following response:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ServerCertificateMetadata&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ServerCertificateId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ASCAxxxxxxxxxxxxxxZ7S&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ServerCertificateName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sparanoid.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Expiration&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2018-04-26T23:59:59Z&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Path&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/cloudfront/prod/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Arn&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;arn:aws:iam::677998837349:server-certificate/cloudfront/prod/sparanoid.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;UploadDate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2015-04-27T03:54:45.807Z&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you can enable the Custom SSL Certificate stored in your AWS IAM from the web console.&lt;/p&gt;
+
+&lt;p&gt;Notes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The size of the public key in the SSL certificate cannot exceed 2048 bits &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+  &lt;li&gt;As of October of 2015, you still can’t use ECC certificate (ECDSA cipher suites) for CloudFront &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;update-ssl-certificate&quot;&gt;Update SSL Certificate&lt;/h3&gt;
+
+&lt;p&gt;If the certificate you’re using is expiring, you need first upload the new certificate with a different &lt;code class=&quot;highlighter-rouge&quot;&gt;server-certificate-name&lt;/code&gt;, change the expiring certificate to the new one, then you can optionally remove the old certificate with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws iam delete-server-certificate&lt;/code&gt;. You can also list all existing certificates via &lt;code class=&quot;highlighter-rouge&quot;&gt;aws iam list-server-certificates&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;See “Determining the Size of the Public Key in an SSL Certificate” section in &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html&quot;&gt;Using an HTTPS Connection to Access Your Objects - Amazon CloudFront&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;See “Encryption” in &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html&quot;&gt;Request and Response Behavior for Custom Origins - Amazon CloudFront&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+          
+          
+        
+      
+        </content><summary>Previously this site was hosted on a Linode VPS, handling thousands of requests a day. It’s stable, fast, and has a great support team. But this time I would like to try something new - host my website entirely in the cloud.</summary></entry><entry><title>Shutdown Like a Boss</title><id>https://digitalauthority.com.au//note/shutdown-like-a-boss/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/shutdown-like-a-boss/" /><published>2015-01-02T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;blockquote&gt;
+  &lt;p&gt;This blog will probably teach you how to shutdown your business like a boss. All posts here are copied from predecessors sent to their useless users via emails.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A new Tumblr blog I created for fun.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://shutdownlikeaboss.com/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>  This blog will probably teach you how to shutdown your business like a boss. All posts here are copied from predecessors sent to their useless users via emails.</summary></entry><entry><title>Chinese Copywriting Guidelines</title><id>https://digitalauthority.com.au//note/chinese-copywriting-guidelines/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/chinese-copywriting-guidelines/" /><published>2014-10-31T00:00:00+08:00</published><updated>2019-10-14T19:23:39+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Chinese copywriting guidelines for better written communication.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sparanoid/chinese-copywriting-guidelines&quot;&gt;Other languages available&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+
+&lt;ul class=&quot;no_toc&quot; id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot; id=&quot;markdown-toc-table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#spacing&quot; id=&quot;markdown-toc-spacing&quot;&gt;Spacing&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#place-one-space-beforeafter-english-words&quot; id=&quot;markdown-toc-place-one-space-beforeafter-english-words&quot;&gt;Place one space before/after English words&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#place-one-space-beforeafter-numbers&quot; id=&quot;markdown-toc-place-one-space-beforeafter-numbers&quot;&gt;Place one space before/after numbers&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#place-one-space-between-numbers-and-units&quot; id=&quot;markdown-toc-place-one-space-between-numbers-and-units&quot;&gt;Place one space between numbers and units&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#no-additional-spaces-beforeafter-punctuation-in-fullwidth-form&quot; id=&quot;markdown-toc-no-additional-spaces-beforeafter-punctuation-in-fullwidth-form&quot;&gt;No additional spaces before/after punctuation in fullwidth form&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#text-spacing-to-the-rescue&quot; id=&quot;markdown-toc-text-spacing-to-the-rescue&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;text-spacing&lt;/code&gt; to the rescue?&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#punctuation&quot; id=&quot;markdown-toc-punctuation&quot;&gt;Punctuation&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#avoid-duplicate-punctuation&quot; id=&quot;markdown-toc-avoid-duplicate-punctuation&quot;&gt;Avoid duplicate punctuation&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#fullwidth-and-halfwidth&quot; id=&quot;markdown-toc-fullwidth-and-halfwidth&quot;&gt;Fullwidth and halfwidth&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#use-punctuation-in-fullwidth-form&quot; id=&quot;markdown-toc-use-punctuation-in-fullwidth-form&quot;&gt;Use punctuation in fullwidth form&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#use-numbers-in-halfwidth-form&quot; id=&quot;markdown-toc-use-numbers-in-halfwidth-form&quot;&gt;Use numbers in halfwidth form&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#use-punctuation-in-halfwidth-form-for-english-sentences&quot; id=&quot;markdown-toc-use-punctuation-in-halfwidth-form-for-english-sentences&quot;&gt;Use punctuation in halfwidth form for English sentences&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nouns&quot; id=&quot;markdown-toc-nouns&quot;&gt;Nouns&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#專有名詞使用正確的大小寫&quot; id=&quot;markdown-toc-專有名詞使用正確的大小寫&quot;&gt;專有名詞使用正確的大小寫&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#avoid-jargons&quot; id=&quot;markdown-toc-avoid-jargons&quot;&gt;Avoid jargons&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dispute&quot; id=&quot;markdown-toc-dispute&quot;&gt;Dispute&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#add-extra-spaces-beforeafter-links&quot; id=&quot;markdown-toc-add-extra-spaces-beforeafter-links&quot;&gt;Add extra spaces before/after links&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#use-corner-brackets-for-chinese-simplified&quot; id=&quot;markdown-toc-use-corner-brackets-for-chinese-simplified&quot;&gt;Use corner brackets for Chinese Simplified&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tools&quot; id=&quot;markdown-toc-tools&quot;&gt;Tools&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#examples-of-who-is-doing-this&quot; id=&quot;markdown-toc-examples-of-who-is-doing-this&quot;&gt;Examples of “Who is doing this?”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#references&quot; id=&quot;markdown-toc-references&quot;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;spacing&quot;&gt;Spacing&lt;/h2&gt;
+
+&lt;p&gt;「有研究顯示，打字的時候不喜歡在中文和英文之間加空格的人，感情路都走得很辛苦，有七成的比例會在 34 歲的時候跟自己不愛的人結婚，而其餘三成的人最後只能把遺產留給自己的貓。畢竟愛情跟書寫都需要適時地留白。&lt;/p&gt;
+
+&lt;p&gt;與大家共勉之。」——&lt;a href=&quot;https://github.com/vinta/pangu.js&quot;&gt;vinta/paranoid-auto-spacing&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;place-one-space-beforeafter-english-words&quot;&gt;Place one space before/after English words&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在 LeanCloud 上，數據存儲是圍繞 &lt;code class=&quot;highlighter-rouge&quot;&gt;AVObject&lt;/code&gt; 進行的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在LeanCloud上，數據存儲是圍繞&lt;code class=&quot;highlighter-rouge&quot;&gt;AVObject&lt;/code&gt;進行的。&lt;/p&gt;
+
+  &lt;p&gt;在 LeanCloud上，數據存儲是圍繞&lt;code class=&quot;highlighter-rouge&quot;&gt;AVObject&lt;/code&gt; 進行的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;An example of complete and correct usage:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在 LeanCloud 上，數據儲存是圍繞 &lt;code class=&quot;highlighter-rouge&quot;&gt;AVObject&lt;/code&gt; 進行的。每個 &lt;code class=&quot;highlighter-rouge&quot;&gt;AVObject&lt;/code&gt; 都包含了與 JSON 兼容的 key-value 對應的數據。數據是 schema-free 的，你不需要在每個 &lt;code class=&quot;highlighter-rouge&quot;&gt;AVObject&lt;/code&gt; 上提前指定存在哪些键，只要直接設定對應的 key-value 即可。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Exceptions: For product and brand names, please refer to the writing format of the official definition. For example, use “豆瓣FM” instead of “豆瓣 FM”.&lt;/p&gt;
+
+&lt;h3 id=&quot;place-one-space-beforeafter-numbers&quot;&gt;Place one space before/after numbers&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;今天出去買菜花了 5000 元。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;今天出去買菜花了 5000元。&lt;/p&gt;
+
+  &lt;p&gt;今天出去買菜花了5000元。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;place-one-space-between-numbers-and-units&quot;&gt;Place one space between numbers and units&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我家的光纖入屋寬頻有 10 Gbps，SSD 一共有 20 TB。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我家的光纖入屋寬頻有 10Gbps，SSD 一共有 20TB。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Exceptions: There should not be any spacing between numbers and degrees/percentages.&lt;/p&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;今天是 233° 的高溫。&lt;/p&gt;
+
+  &lt;p&gt;新 MacBook Pro 有 15% 的 CPU 性能提升。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;今天是 233 ° 的高溫。&lt;/p&gt;
+
+  &lt;p&gt;新 MacBook Pro 有 15 % 的 CPU 性能提升。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;no-additional-spaces-beforeafter-punctuation-in-fullwidth-form&quot;&gt;No additional spaces before/after punctuation in fullwidth form&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;剛剛買了一部 iPhone，好開心！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;剛剛買了一部 iPhone ，好開心！&lt;/p&gt;
+
+  &lt;p&gt;剛剛買了一部 iPhone， 好開心！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;text-spacing-to-the-rescue&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;text-spacing&lt;/code&gt; to the rescue?&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.w3.org/TR/css-text-4/#text-spacing-property&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;text-spacing&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://msdn.microsoft.com/library/ms531164(v=vs.85).aspx&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-ms-text-autospace&lt;/code&gt;&lt;/a&gt; provided by CSS Text Module Level and Microsoft can specify the autospacing and narrow space width adjustment of text. However it’s not popular, and on other platforms such as OS X and iOS we can not use this feature. So it’s better for you to keep up the habit.&lt;/p&gt;
+
+&lt;h2 id=&quot;punctuation&quot;&gt;Punctuation&lt;/h2&gt;
+
+&lt;h3 id=&quot;avoid-duplicate-punctuation&quot;&gt;Avoid duplicate punctuation&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;德國隊竟然戰勝了巴西隊！&lt;/p&gt;
+
+  &lt;p&gt;她竟然對你說「喵」？！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;德國隊竟然戰勝了巴西隊！！&lt;/p&gt;
+
+  &lt;p&gt;德國隊竟然戰勝了巴西隊！！！！！！！！&lt;/p&gt;
+
+  &lt;p&gt;她竟然對你說「喵」？？！！&lt;/p&gt;
+
+  &lt;p&gt;她竟然對你說「喵」？！？！？？！！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;fullwidth-and-halfwidth&quot;&gt;Fullwidth and halfwidth&lt;/h2&gt;
+
+&lt;p&gt;If you’re not familiar with fullwidth and halfwidth forms please refer to &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2&quot;&gt;Halfwidth and fullwidth&lt;/a&gt; forms on Wikipedia.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-punctuation-in-fullwidth-form&quot;&gt;Use punctuation in fullwidth form&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;嗨！你知道嘛？今天前台的小妹跟我說「喵」了哎！&lt;/p&gt;
+
+  &lt;p&gt;核磁共振成像（NMRI）是什麼原理都不知道？JFGI！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;嗨! 你知道嘛? 今天前台的小妹跟我說 “喵” 了哎!&lt;/p&gt;
+
+  &lt;p&gt;嗨!你知道嘛?今天前台的小妹跟我說”喵”了哎!&lt;/p&gt;
+
+  &lt;p&gt;核磁共振成像 (NMRI) 是什麼原理都不知道? JFGI!&lt;/p&gt;
+
+  &lt;p&gt;核磁共振成像(NMRI)是什麼原理都不知道?JFGI!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;use-numbers-in-halfwidth-form&quot;&gt;Use numbers in halfwidth form&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;這件蛋糕只賣 1000 元。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;這件蛋糕只賣 １０００ 元。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Exceptions: fullwidth numbers are acceptable for better visual alignment in graphic design.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-punctuation-in-halfwidth-form-for-english-sentences&quot;&gt;Use punctuation in halfwidth form for English sentences&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;賈伯斯那句話是怎麼說的？「Stay hungry, stay foolish.」&lt;/p&gt;
+
+  &lt;p&gt;推薦你閱讀《Hackers &amp;amp; Painters: Big Ideas from the Computer Age》，非常的有趣。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;賈伯斯那句話是怎麼說的？「Stay hungry，stay foolish。」&lt;/p&gt;
+
+  &lt;p&gt;推薦你閱讀《Hackers＆Painters：Big Ideas from the Computer Age》，非常的有趣。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;nouns&quot;&gt;Nouns&lt;/h2&gt;
+
+&lt;h3 id=&quot;專有名詞使用正確的大小寫&quot;&gt;專有名詞使用正確的大小寫&lt;/h3&gt;
+
+&lt;p&gt;大小寫相關用法原屬於英文書寫範疇，不屬於本 wiki 討論內容，在這裡只對部分易錯用法進行簡述。&lt;/p&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;使用 GitHub 登錄&lt;/p&gt;
+
+  &lt;p&gt;我們的客戶有 GitHub、Foursquare、Microsoft Corporation、Google、Facebook, Inc.。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;使用 github 登錄&lt;/p&gt;
+
+  &lt;p&gt;使用 GITHUB 登錄&lt;/p&gt;
+
+  &lt;p&gt;使用 Github 登錄&lt;/p&gt;
+
+  &lt;p&gt;使用 gitHub 登錄&lt;/p&gt;
+
+  &lt;p&gt;使用 gｲんĤЦ8 登錄&lt;/p&gt;
+
+  &lt;p&gt;我們的客戶有 github、foursquare、microsoft corporation、google、facebook, inc.。&lt;/p&gt;
+
+  &lt;p&gt;我們的客戶有 GITHUB、FOURSQUARE、MICROSOFT CORPORATION、GOOGLE、FACEBOOK, INC.。&lt;/p&gt;
+
+  &lt;p&gt;我們的客戶有 Github、FourSquare、MicroSoft Corporation、Google、FaceBook, Inc.。&lt;/p&gt;
+
+  &lt;p&gt;我們的客戶有 gitHub、fourSquare、microSoft Corporation、google、faceBook, Inc.。&lt;/p&gt;
+
+  &lt;p&gt;我們的客戶有 gｲんĤЦ8、ｷouЯƧquﾑгє、๓เςг๏ร๏Ŧt ς๏гק๏гคtเ๏ภn、900913、ƒ4ᄃëв๏๏к, IПᄃ.。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;注意：當網頁中需要配合整體視覺風格而出現全部大寫／小寫的情形，HTML 中請使用標準的大小寫規範進行書寫；並通過 &lt;code class=&quot;highlighter-rouge&quot;&gt;text-transform: uppercase;&lt;/code&gt;／&lt;code class=&quot;highlighter-rouge&quot;&gt;text-transform: lowercase;&lt;/code&gt; 對表現形式進行定義。&lt;/p&gt;
+
+&lt;h3 id=&quot;avoid-jargons&quot;&gt;Avoid jargons&lt;/h3&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我們需要一位熟悉 JavaScript、HTML5，至少理解一種框架（如 Backbone.js、AngularJS、React 等）的前端開發者。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bad:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我們需要一位熟悉 Js、h5，至少理解一種框架（如 backbone、angular、RJS 等）的 FED。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;dispute&quot;&gt;Dispute&lt;/h2&gt;
+
+&lt;p&gt;The following usages comprise of personal characteristics. As such, from the perspective of copywriting guidelines, they are &lt;strong&gt;still correct&lt;/strong&gt; regardless of whether they comply with the following rules.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-extra-spaces-beforeafter-links&quot;&gt;Add extra spaces before/after links&lt;/h3&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;請 &lt;a href=&quot;#&quot;&gt;提交一个 issue&lt;/a&gt; 並分配给相關同事。&lt;/p&gt;
+
+  &lt;p&gt;訪問我們網站的最新動態，請 &lt;a href=&quot;#&quot;&gt;點擊這裡&lt;/a&gt; 進行訂閱！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;compared with:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;請&lt;a href=&quot;#&quot;&gt;提交一个 issue&lt;/a&gt; 並分配给相關同事。&lt;/p&gt;
+
+  &lt;p&gt;訪問我們網站的最新動態，請&lt;a href=&quot;#&quot;&gt;點擊這裡&lt;/a&gt;進行訂閱！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;use-corner-brackets-for-chinese-simplified&quot;&gt;Use corner brackets for Chinese Simplified&lt;/h3&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;「老師，『有條不紊』的『紊』是什麼意思？」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;compared with:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“老師，‘有條不紊’的‘紊’是什麼意思？”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;tools&quot;&gt;Tools&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Repository&lt;/th&gt;
+      &lt;th&gt;Language&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/vinta/paranoid-auto-spacing&quot;&gt;vinta/paranoid-auto-spacing&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;JavaScript&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/huei90/pangu.node&quot;&gt;huei90/pangu.node&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Node.js&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/huacnlee/auto-correct&quot;&gt;huacnlee/auto-correct&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Ruby&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/sparanoid/space-lover&quot;&gt;sparanoid/space-lover&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;PHP (WordPress)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/NauxLiu/auto-correct&quot;&gt;nauxliu/auto-correct&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;PHP&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/jxlwqq/chinese-typesetting&quot;&gt;jxlwqq/chinese-typesetting&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;PHP&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/hotoo/pangu.vim&quot;&gt;hotoo/pangu.vim&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Vim&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/sparanoid/grunt-auto-spacing&quot;&gt;sparanoid/grunt-auto-spacing&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Node.js (Grunt)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/hjiang/scripts/blob/master/add-space-between-latin-and-cjk&quot;&gt;hjiang/scripts/add-space-between-latin-and-cjk&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Python&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/hustcc/hint&quot;&gt;hustcc/hint&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Python&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/studygolang/autocorrect&quot;&gt;studygolang/autocorrect&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Go&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;examples-of-who-is-doing-this&quot;&gt;Examples of “Who is doing this?”&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Website&lt;/th&gt;
+      &lt;th&gt;Copywriting&lt;/th&gt;
+      &lt;th&gt;UGC&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.apple.com/cn/&quot;&gt;Apple China&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.apple.com/hk/&quot;&gt;Apple Hong Kong&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.apple.com/tw/&quot;&gt;Apple Taiwan&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.microsoft.com/zh-cn/&quot;&gt;Microsoft China&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.microsoft.com/zh-hk/&quot;&gt;Microsoft Hong Kong&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.microsoft.com/zh-tw/&quot;&gt;Microsoft Taiwan&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://leancloud.cn/&quot;&gt;LeanCloud&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.v2ex.com/&quot;&gt;V2EX&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://apple4us.com/&quot;&gt;Apple4us&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://ruby-china.org/&quot;&gt;Ruby China&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Titles only&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://phphub.org/&quot;&gt;PHPHub&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Titles only&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://sspai.com/&quot;&gt;少數派&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.thoughtco.com/guidelines-for-using-capital-letters-1691724&quot;&gt;Guidelines for Using Capital Letters - ThoughtCo.&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Letter_case&quot;&gt;Letter case - Wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.oxforddictionaries.com/grammar/punctuation&quot;&gt;Punctuation - Oxford Dictionaries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://owl.english.purdue.edu/owl/section/1/6/&quot;&gt;Punctuation - The Purdue OWL&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.wikihow.com/Use-English-Punctuation-Correctly&quot;&gt;How to Use English Punctuation Correctly - wikiHow&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zh.opensuse.org/index.php?title=Help:%E6%A0%BC%E5%BC%8F&quot;&gt;格式 - openSUSE&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms&quot;&gt;Halfwidth and fullwidth forms - Wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%BC%95%E8%99%9F&quot;&gt;引號 - 維基百科&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Interrobang&quot;&gt;Interrobang - Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://github.com/sparanoid/chinese-copywriting-guidelines&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Chinese copywriting guidelines for better written communication.</summary></entry><entry><title>OCSP Stapling and Nginx</title><id>https://digitalauthority.com.au//note/ocsp-stapling-nginx/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/ocsp-stapling-nginx/" /><published>2013-04-27T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;I’ve already &lt;a href=&quot;/note/playing-with-ocsp-stapling/&quot;&gt;deployed OCSP Stapling&lt;/a&gt; back in November, 2012. Now I’d like to share how to setup OCSP Stapling on CentOS with you.&lt;/p&gt;
+
+&lt;p&gt;Configurate OCSP for sparanoid.com. Get your current SSL certificates chain order:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl s_client &lt;span class=&quot;nt&quot;&gt;-showcerts&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-connect&lt;/span&gt; sparanoid:443  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;level&quot;&lt;/span&gt; c &lt;span class=&quot;s2&quot;&gt;&quot;.crt&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)}&lt;/span&gt; /---END CERTIFICATE-----/&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Print out the OCSP server:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl x509 &lt;span class=&quot;nt&quot;&gt;-noout&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-text&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; sparanoid.com.crt | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;OCSP
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Validate certs against the OCSP server:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl ocsp &lt;span class=&quot;nt&quot;&gt;-text&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-no_nonce&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-issuer&lt;/span&gt; PositiveSSLCA2.crt &lt;span class=&quot;nt&quot;&gt;-CAfile&lt;/span&gt; sparanoid_com.crt &lt;span class=&quot;nt&quot;&gt;-cert&lt;/span&gt; sparanoid_com.crt &lt;span class=&quot;nt&quot;&gt;-VAfile&lt;/span&gt; PositiveSSLCA2.crt &lt;span class=&quot;nt&quot;&gt;-url&lt;/span&gt; http://ocsp.comodoca.com &lt;span class=&quot;nt&quot;&gt;-respout&lt;/span&gt; /etc/ssl/certs/sparanoid.com_staple
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add OCSP Stapling support for Nginx, for more infomation you should refer to &lt;a href=&quot;https://nginx.org/en/docs/http/ngx_http_ssl_module.html&quot;&gt;Nginx’s &lt;code class=&quot;highlighter-rouge&quot;&gt;ngx_http_ssl_module&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ssl_stapling&lt;/span&gt;            &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;resolver&lt;/span&gt;                &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.8.8.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ssl_stapling_file&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;/etc/ssl/certs/sparanoid.com_staple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ssl_stapling_verify&lt;/span&gt;     &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Reload nginx to validate if OCSP Stapling is working:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl s_client &lt;span class=&quot;nt&quot;&gt;-connect&lt;/span&gt; sparanoid.com:443 &lt;span class=&quot;nt&quot;&gt;-tls1_2&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-tlsextdebug&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-status&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;the-problem&quot;&gt;The Problem&lt;/h3&gt;
+
+&lt;p&gt;Updated Jan 20, 2014, 6:29 PM: So far the above guide is not working any more, so what did I do wrong? Please recheck my configuration:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ssl_stapling_file&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;/etc/ssl/certs/sparanoid.com_staple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ssl_stapling_file&lt;/code&gt; configuration itself is not a problem. However, the problem is that the stapling response should be updated periodically. So the above configuration resulted an outdated OCSP response:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OCSP Response Data:
+    OCSP Response Status: successful (0x0)
+    ...
+    Produced At: Apr 12 12:20:35 2013 GMT
+    ...
+    Cert Status: good
+    This Update: Apr 12 12:20:35 2013 GMT
+    Next Update: Apr 16 20:20:35 2013 GMT
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;the-solution&quot;&gt;The Solution&lt;/h3&gt;
+
+&lt;p&gt;So how to solve this issue? You don’t need cron to fetch the stapling file, for example you can use the following configuration:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ssl_stapling&lt;/span&gt;            &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ssl_stapling_verify&lt;/span&gt;     &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;resolver&lt;/span&gt;                &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.8.8.8&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.8.4.4&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;valid=300s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;resolver_timeout&lt;/span&gt;        &lt;span class=&quot;s&quot;&gt;3s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ssl_trusted_certificate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;/etc/nginx/ssl/ca/PositiveSSL-CA.bundle.crt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Instead of defining &lt;code class=&quot;highlighter-rouge&quot;&gt;ssl_stapling_file&lt;/code&gt;, use &lt;code class=&quot;highlighter-rouge&quot;&gt;ssl_trusted_certificate&lt;/code&gt; will let Nginx update OCSP response automatically, so it’s recommended to define a failover DNS resolver and a small resolver timeout.&lt;/p&gt;
+
+&lt;h2 id=&quot;notes&quot;&gt;Notes&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ssl_trusted_certificate&lt;/code&gt; option &lt;strong&gt;must&lt;/strong&gt; point to the root certificate and all intermediate certificates of the CA:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For verification to work, the certificate of the server certificate issuer, the root certificate, and all intermediate certificates should be configured as trusted using the &lt;code class=&quot;highlighter-rouge&quot;&gt;ssl_trusted_certificate&lt;/code&gt; directive.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can also enable OCSP Stapling for multiple server directives. However OCSP Stapling must be first enabled in the &lt;code class=&quot;highlighter-rouge&quot;&gt;default_server&lt;/code&gt; directive before it can be enabled on any other directive.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>I’ve already deployed OCSP Stapling back in November, 2012. Now I’d like to share how to setup OCSP Stapling on CentOS with you.</summary></entry><entry><title>SPDY Draft 2 and Nginx</title><id>https://digitalauthority.com.au//note/spdy-draft-2-nginx/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/spdy-draft-2-nginx/" /><published>2013-04-02T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;I’ve already &lt;a href=&quot;/note/playing-with-spdy-draft-2/&quot;&gt;deployed SPDY&lt;/a&gt; back in September, 2012. Now I’d like to share how to setup SPDY and OpenSSL on CentOS with you.&lt;/p&gt;
+
+&lt;p&gt;SPDY has a dependency with OpenSSL, and you also need the latest OpenSSL, the latest version is 1.0.1e as I wrote this post.&lt;/p&gt;
+
+&lt;p&gt;First install OpenSSL 1.0.1 from IUS repo for Nginx:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum replace openssl &lt;span class=&quot;nt&quot;&gt;--replace-with&lt;/span&gt; openssl10 &lt;span class=&quot;nt&quot;&gt;--enablerepo&lt;/span&gt; ius-testing
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The current stable version of Nginx still doesn’t support SPDY, you need to compile it from source, the latest Nginx version that supports SPDY is 1.3.14 with SPDY patch.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Aprl 25, 2013 update&lt;/strong&gt;: SPDY patch has been merged into Nginx 1.4.0 and 1.3.15, so you don’t need to compile it any more, but you still need OpenSSL 1.0.1 or higher to make SPDY work.&lt;/p&gt;
+
+&lt;p&gt;Compile Nginx with SPDY support:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /tmp/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://nginx.org/download/nginx-1.3.14.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;zxvf nginx-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;nginx-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Install Nginx dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; patch gcc pcre-devel zlib-devel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Patch Nginx with SPDY support:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://nginx.org/patches/spdy/patch.spdy.txt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;patch &lt;span class=&quot;nt&quot;&gt;-p1&lt;/span&gt; &amp;lt; patch.spdy.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Compile Nginx with OpenSSL:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://www.openssl.org/source/openssl-1.0.1e.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;zxvf openssl-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;nginx-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Configure Nginx with options &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-http_spdy_module&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-openssl=/tmp/openssl-1.0.1e&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./configure &lt;span class=&quot;nt&quot;&gt;--prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/nginx/ &lt;span class=&quot;nt&quot;&gt;--sbin-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/sbin/nginx &lt;span class=&quot;nt&quot;&gt;--conf-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/nginx/nginx.conf &lt;span class=&quot;nt&quot;&gt;--error-log-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/log/nginx/error.log &lt;span class=&quot;nt&quot;&gt;--http-log-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/log/nginx/access.log &lt;span class=&quot;nt&quot;&gt;--pid-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/run/nginx.pid &lt;span class=&quot;nt&quot;&gt;--lock-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/run/nginx.lock &lt;span class=&quot;nt&quot;&gt;--http-client-body-temp-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/cache/nginx/client_temp &lt;span class=&quot;nt&quot;&gt;--http-proxy-temp-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/cache/nginx/proxy_temp &lt;span class=&quot;nt&quot;&gt;--http-fastcgi-temp-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/cache/nginx/fastcgi_temp &lt;span class=&quot;nt&quot;&gt;--http-uwsgi-temp-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/cache/nginx/uwsgi_temp &lt;span class=&quot;nt&quot;&gt;--http-scgi-temp-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/cache/nginx/scgi_temp &lt;span class=&quot;nt&quot;&gt;--user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;nginx &lt;span class=&quot;nt&quot;&gt;--group&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;nginx &lt;span class=&quot;nt&quot;&gt;--with-http_ssl_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_realip_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_addition_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_sub_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_dav_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_flv_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_mp4_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_gzip_static_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_random_index_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_secure_link_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_stub_status_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-mail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-mail_ssl_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-file-aio&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-ipv6&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-cc-opt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'-O2 -g -march=i386 -mtune=i686'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-http_spdy_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-openssl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/tmp/openssl-1.0.1e
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now Nginx is configured and compiled with SPDY support, then you need to enable SPDY for your server directives:&lt;/p&gt;
+
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt;               &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;       &lt;span class=&quot;s&quot;&gt;default_server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt;               &lt;span class=&quot;s&quot;&gt;[::]:80&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;default_server&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ipv6only=on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt;               &lt;span class=&quot;mi&quot;&gt;443&lt;/span&gt;      &lt;span class=&quot;s&quot;&gt;ssl&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;spdy&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;default_server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt;               &lt;span class=&quot;s&quot;&gt;[::]:443&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ssl&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;spdy&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;default_server&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ipv6only=on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Restart (reload) your Nginx, open chrome://net-internals/#spdy in your Google Chrome to see if SPDY is enabled correctly. You can also try &lt;a href=&quot;https://chrome.google.com/webstore/detail/spdy-indicator/mpbpobfflnpcgagjijhmgnchggcjblin?hl=en&quot;&gt;SPDY indicator&lt;/a&gt; extension.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>I’ve already deployed SPDY back in September, 2012. Now I’d like to share how to setup SPDY and OpenSSL on CentOS with you.</summary></entry><entry><title>A List Apart 5.0</title><id>https://digitalauthority.com.au//note/ala-5.0/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/ala-5.0/" /><published>2013-01-26T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;blockquote&gt;
+  &lt;p&gt;A design that departs from our past and a platform on which to build the future. Welcome to the relaunch of A List Apart, for people who make websites. Content first: We’ve added new kinds of content (with more to come), and we’re publishing more frequently—a lot more frequently. Fear not, we will continue to produce the insightful and important articles you expect from A List Apart, and the biweekly issues they ride in on. Major articles and (mostly) biweekly issues are forever.&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;cite&gt;&lt;a href=&quot;https://alistapart.com/article/a-list-apart-relaunches-new-features-new-design/&quot;&gt;Jeffrey Zeldman&lt;/a&gt;&lt;/cite&gt;
+  &lt;/footer&gt;
+&lt;/blockquote&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://alistapart.com/article/a-list-apart-relaunches-new-features-new-design/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>  A design that departs from our past and a platform on which to build the future. Welcome to the relaunch of A List Apart, for people who make websites. Content first: We’ve added new kinds of content (with more to come), and we’re publishing more frequently—a lot more frequently. Fear not, we will continue to produce the insightful and important articles you expect from A List Apart, and the biweekly issues they ride in on. Major articles and (mostly) biweekly issues are forever.      Jeffrey Zeldman  </summary></entry><entry><title>$3.1 Billion in a Day</title><id>https://digitalauthority.com.au//note/3.1-billion-in-a-day/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/3.1-billion-in-a-day/" /><published>2012-11-13T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;blockquote&gt;
+  &lt;p&gt;Two days ago the Chinese website &lt;a href=&quot;https://www.taobao.com/&quot;&gt;Taobao&lt;/a&gt; held a discount promotion to celebrate what’s known as “double sticks day” in China. In a single 24hr period, they conducted 19bn RMB (US$3.06bn) of business.&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;cite&gt;&lt;a href=&quot;https://web.archive.org/web/20141208080948/http://westiseast.co.uk/blog/taobao-sales-19-billion-bonanza/&quot;&gt;Chris West&lt;/a&gt;&lt;/cite&gt;
+  &lt;/footer&gt;
+&lt;/blockquote&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20141208080948/http://westiseast.co.uk/blog/taobao-sales-19-billion-bonanza/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>  Two days ago the Chinese website Taobao held a discount promotion to celebrate what’s known as “double sticks day” in China. In a single 24hr period, they conducted 19bn RMB (US$3.06bn) of business.      Chris West  </summary></entry><entry><title>Playing with OCSP Stapling</title><id>https://digitalauthority.com.au//note/playing-with-ocsp-stapling/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/playing-with-ocsp-stapling/" /><published>2012-11-04T00:00:00+08:00</published><updated>2018-09-23T17:52:56+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;本站已嘗試性的部署了 OCSP Stapling，什麼是 OCSP Stapling？JFGI。如果您通過 HTTPS 協議訪問本網站，可以感受到不明顯的訪問速度提升&lt;/p&gt;
+
+&lt;p&gt;這是目前只有 CloudFlare 等章亦春老師都去加入的高端團隊才會去研究和部署的玩具，所以本站這次的 OCSP Stapling 部署在整個互聯網建設歷史上又一次具有劃時代的重要意義！&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>本站已嘗試性的部署了 OCSP Stapling，什麼是 OCSP Stapling？JFGI。如果您通過 HTTPS 協議訪問本網站，可以感受到不明顯的訪問速度提升</summary></entry><entry><title>Playing with SPDY Draft 2</title><id>https://digitalauthority.com.au//note/playing-with-spdy-draft-2/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/playing-with-spdy-draft-2/" /><published>2012-10-12T00:00:00+08:00</published><updated>2018-09-23T17:52:56+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;本站已嘗試性的部署了 SPDY 協議（Draft 2），什麼是 SPDY？JFGI。本站已於上個月底完成並且實現了 SPDY 協議的全站開啟。當你網絡狀況良好或身處中國大陸之外的地區時，使用最新版 Chrome、Safari、Opera 瀏覽器訪問本站會有更快的訪問速度&lt;/p&gt;
+
+&lt;p&gt;這是目前只有 Google、Twitter、WordPress 等超大型站點才會去研究和部署的玩意，所以本站這次的 SPDY 部署在整個互聯網建設歷史史上具有劃時代時代的重要意義！&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>本站已嘗試性的部署了 SPDY 協議（Draft 2），什麼是 SPDY？JFGI。本站已於上個月底完成並且實現了 SPDY 協議的全站開啟。當你網絡狀況良好或身處中國大陸之外的地區時，使用最新版 Chrome、Safari、Opera 瀏覽器訪問本站會有更快的訪問速度</summary></entry><entry><title>Safari 6 Gets Faster</title><id>https://digitalauthority.com.au//note/safari-6-gets-faster/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/safari-6-gets-faster/" /><published>2012-07-30T00:00:00+08:00</published><updated>2014-04-01T00:58:16+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Apple’s venerable web browser, Safari, was updated to version 6 shipped with the OS X Mountain Lion. There’re two changes I noticed: One is the blue progress bar, seems that it instantly disappeared after the HTML DOM laoded without images. The other is, scrolling is really smooth even when it is processing new content on a web page.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Apple’s venerable web browser, Safari, was updated to version 6 shipped with the OS X Mountain Lion. There’re two changes I noticed: One is the blue progress bar, seems that it instantly disappeared after the HTML DOM laoded without images. The other is, scrolling is really smooth even when it is processing new content on a web page.</summary></entry><entry><title>Big Typography Dynasty</title><id>https://digitalauthority.com.au//note/big-typography-dynasty/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/big-typography-dynasty/" /><published>2012-07-14T00:00:00+08:00</published><updated>2014-04-01T00:58:16+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;My site is now more responsive with big typography. I know most of the designers are still making their webpages with font size from 12px to 14px. But it’s time to use bigger typography now. The Big Typography Dynasty has come.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>My site is now more responsive with big typography. I know most of the designers are still making their webpages with font size from 12px to 14px. But it’s time to use bigger typography now. The Big Typography Dynasty has come.</summary></entry><entry><title>‘Free’ Dribbble Invite</title><id>https://digitalauthority.com.au//note/free-dribbble-invite/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/free-dribbble-invite/" /><published>2012-06-24T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Some Chinese designers are &lt;a href=&quot;https://web.archive.org/web/20141230173723/http://bbs.ui.cn/thread-30389-1-1.html&quot;&gt;selling&lt;/a&gt; their Dribbble invites for about $235 (1500 CNY in China). I’m really amazed. So I decide to giveaway one Dribbble invite for you guys who are still looking for it… for FREE!&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://www.v2ex.com/t/40433?r=sparanoid&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Some Chinese designers are selling their Dribbble invites for about $235 (1500 CNY in China). I’m really amazed. So I decide to giveaway one Dribbble invite for you guys who are still looking for it… for FREE!</summary></entry><entry><title>I Don’t “Get” Art</title><id>https://digitalauthority.com.au//note/i-dont-get-art/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/i-dont-get-art/" /><published>2012-06-18T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;The reason why I post the YC link here is that’s really “worth reading”.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://news.ycombinator.com/item?id=4124275&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>The reason why I post the YC link here is that’s really “worth reading”.</summary></entry><entry><title>Minimalist Syndrome</title><id>https://digitalauthority.com.au//note/minimalist-syndrome/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/minimalist-syndrome/" /><published>2011-10-05T00:00:00+08:00</published><updated>2014-04-01T00:58:16+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;I intended to close this site, with a simple, lonely logo at the frontpage. Until I realised I’ve ran it for almost six years. Deleted my old posts, it’s brand-new.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>I intended to close this site, with a simple, lonely logo at the frontpage. Until I realised I’ve ran it for almost six years. Deleted my old posts, it’s brand-new.</summary></entry><entry><title>NITE</title><id>https://digitalauthority.com.au//note/nite/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/nite/" /><published>2011-07-16T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Last time I redesign my site &lt;a href=&quot;/note/cyrconplex/&quot;&gt;I said&lt;/a&gt; “Oh this time it looks great I’m going to use it for long enough”. But less than two month I redesigned my site again. It at first inspired by &lt;a href=&quot;https://web.archive.org/web/20111127185400/http://lifepath.me/&quot;&gt;Lifepath&lt;/a&gt;, I create a &lt;a href=&quot;/lab/start/&quot;&gt;start page&lt;/a&gt; for my Safari default homepage (It looks really nice and you can have a try). I’m satisfied with this style then I deployed it to the whole site. &lt;del&gt;The style what you’re looking at.&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;I can’t really get what can I do with my site, except redesigning it from time to time.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Last time I redesign my site I said “Oh this time it looks great I’m going to use it for long enough”. But less than two month I redesigned my site again. It at first inspired by Lifepath, I create a start page for my Safari default homepage (It looks really nice and you can have a try). I’m satisfied with this style then I deployed it to the whole site. The style what you’re looking at.</summary></entry><entry><title>cyrconlex</title><id>https://digitalauthority.com.au//note/cyrconplex/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/cyrconplex/" /><published>2011-05-06T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/cyrconplex-preview.jpg&quot; alt=&quot;cyrconlex.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This time I use Courier New, a typography that not so popular, even not so pretty, but most of devices shipped with it. However this site still works fine only on a Mac. on Windows, Courier News renders in a burnt way. I also try to minimise the CSS usage for a complete theme. It’s been six years and my site bumped to version 16, hope this time I can use it for long enough.&lt;/p&gt;
+
+&lt;p&gt;這次使用了 Courier New，一個與主流相比不是那麼好看、但大部分設備都會有的字型，不過基本還只對 Apple 的設備比較友好，Windows 下 Courier New 的渲染仍然比較差。我也嘗試用最少的 CSS 來做一個功能完整的主題，這次看來是基本達到了要求，六年時間，這裡已經進化到第 16 版了，希望這個主題能讓我看順眼的時間長些&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>Notational Velocity</title><id>https://digitalauthority.com.au//note/nv/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/nv/" /><published>2011-04-02T00:00:00+08:00</published><updated>2015-04-21T10:08:01+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Notational Velocity is a really simple note-taking app for OS X, it’s fast and it can sync with Simplenote and Dropbox. I translated it into Chinese Simplified, you can download it on their &lt;a href=&quot;http://notational.net/&quot;&gt;official website&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;http://notational.net/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Notational Velocity is a really simple note-taking app for OS X, it’s fast and it can sync with Simplenote and Dropbox. I translated it into Chinese Simplified, you can download it on their official website.</summary></entry><entry><title>Brand New</title><id>https://digitalauthority.com.au//note/brand-new/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/brand-new/" /><published>2010-12-18T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Recently this site has several downtime because I was moving my server from one to another. And if you've subscribed my site you’ll noticed that all my posts refreshed in your RSS reader. Sorry about that, you can just ignore them, they’re all old posts except this one, just post here to let you know that the site is up and runing now, RSS (Atom) feed will also work (I hope). At last let me tell you what I did these days:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Switched from &lt;a href=&quot;https://linode.com/&quot;&gt;Linode&lt;/a&gt; to &lt;a href=&quot;https://www.rackspacecloud.com/&quot;&gt;Rackspace&lt;/a&gt;, unmanaged cloud server.&lt;/li&gt;
+  &lt;li&gt;Apache to nginx.&lt;/li&gt;
+  &lt;li&gt;WordPress to &lt;a href=&quot;https://github.com/kolber/stacey&quot;&gt;Stacey&lt;/a&gt;, &lt;code&gt;UPDATE:&lt;/code&gt; finally switched to &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Deleted almost all my posts, it’s brand new now.&lt;/li&gt;
+  &lt;li&gt;Categories changed, only two categories now: Work and Nootebook.&lt;/li&gt;
+&lt;/ul&gt;
+
+          
+          
+        
+      
+        </content><summary>Recently this site has several downtime because I was moving my server from one to another. And if you've subscribed my site you’ll noticed that all my posts refreshed in your RSS reader. Sorry about that, you can just ignore them, they’re all old posts except this one, just post here to let you know that the site is up and runing now, RSS (Atom) feed will also work (I hope). At last let me tell you what I did these days:</summary></entry><entry><title>lindsay-koinaka 2.0</title><id>https://digitalauthority.com.au//note/lindsay-koinaka-2/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/lindsay-koinaka-2/" /><published>2010-10-21T00:00:00+08:00</published><updated>2014-04-01T00:58:16+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;It’s a WordPress theme since this version, and it’s the first theme I made on a Mac after switching from Windows to OS X less than a month. Comparing to the initial vesion, all complex layouts and CSS3 animations have removed on this theme. Looks pretty simple. The source code is hosted on GitHub with &lt;strong&gt;details instructions and setup guide&lt;/strong&gt;. The good news is the whole configuration needs only ten steps. And the bad news is, maybe it’s the last theme I made for WordPress.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>It’s a WordPress theme since this version, and it’s the first theme I made on a Mac after switching from Windows to OS X less than a month. Comparing to the initial vesion, all complex layouts and CSS3 animations have removed on this theme. Looks pretty simple. The source code is hosted on GitHub with details instructions and setup guide. The good news is the whole configuration needs only ten steps. And the bad news is, maybe it’s the last theme I made for WordPress.</summary></entry><entry><title>lindsay-koinaka</title><id>https://digitalauthority.com.au//note/lindsay-koinaka/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/lindsay-koinaka/" /><published>2010-09-05T00:00:00+08:00</published><updated>2017-01-08T20:43:14+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;The new theme is out. &lt;del&gt;Just what you’re looking at,&lt;/del&gt; it’s still work-in-progress, based on HTML5 and CSS 3. It looks great on a Webkit brwoser. New Firefox 4 should look fine too. IE 10 may also work except border-radius and animations. The source code can be accessed at &lt;del datetime=&quot;2010-10-15T11:23:56+00:00&quot;&gt;Google Code&lt;/del&gt; &lt;a href=&quot;https://github.com/sparanoid/lindsay-koinaka&quot;&gt;GitHub&lt;/a&gt;, however it’s the first time I’m trying things like this. bug reports, comments, suggestions, and ideas for improvements are welcome.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>The new theme is out. Just what you’re looking at, it’s still work-in-progress, based on HTML5 and CSS 3. It looks great on a Webkit brwoser. New Firefox 4 should look fine too. IE 10 may also work except border-radius and animations. The source code can be accessed at Google Code GitHub, however it’s the first time I’m trying things like this. bug reports, comments, suggestions, and ideas for improvements are welcome.</summary></entry><entry><title>Lester’s Plugins in Chinese</title><id>https://digitalauthority.com.au//note/lesters-plugins-in-chinese/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/lesters-plugins-in-chinese/" /><published>2009-08-06T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;這些基本是我在建一個私人 WPMU 時用到的插件，Lester Chan 的插件翻譯起來是相當舒服的，分離的徹底而且順序也比較有邏輯性。於是就把他大部分的插件都翻譯成了中文&lt;/p&gt;
+
+&lt;p&gt;WP-DBManager 與 WP-PageNavi 以前就有翻譯，所以部分字串的翻譯可能和新翻譯的風格不太一致；還有一些插件沒翻譯，比如 WP-Polls 和 WP-DownloadManager，這些功能我用不上，所以不考慮翻譯，而且已經有人翻譯過，但質量和翻譯度一般。插件的功能就不說了，看名字也略知一二，詳情請訪問 &lt;a href=&quot;https://lesterchan.net/portfolio/programming/php/&quot;&gt;WordPress Plugins@Lester Chan&lt;/a&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>這些基本是我在建一個私人 WPMU 時用到的插件，Lester Chan 的插件翻譯起來是相當舒服的，分離的徹底而且順序也比較有邏輯性。於是就把他大部分的插件都翻譯成了中文</summary></entry><entry><title>Need More Space?</title><id>https://digitalauthority.com.au//note/need-more-space/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/need-more-space/" /><published>2009-07-28T00:00:00+08:00</published><updated>2014-06-09T13:23:15+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;First you should look at &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/ui-in-opera-chrome-ie-and-firefox_large.png&quot;&gt;this preview&lt;/a&gt;. Comparing Opera 10, Chrome 3.0, Internet Exporer 8, Firefox 3.5, The largest viewport area for those brwosers is Chrome. It doens’t have status bar at the bottom and the others have it and it’s enabled by default. Opera has its menus shown by default, but you can hide it. Firefox also have menus but unfortunately you can’t hide it without hacks or extensions.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>First you should look at this preview. Comparing Opera 10, Chrome 3.0, Internet Exporer 8, Firefox 3.5, The largest viewport area for those brwosers is Chrome. It doens’t have status bar at the bottom and the others have it and it’s enabled by default. Opera has its menus shown by default, but you can hide it. Firefox also have menus but unfortunately you can’t hide it without hacks or extensions.</summary></entry><entry><title>BugMirror</title><id>https://digitalauthority.com.au//note/bugmirror/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/bugmirror/" /><published>2007-08-20T00:00:00+08:00</published><updated>2014-04-01T00:58:16+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;BugMirror is a different screen saver, as its packed with bugs. Nowadays screens are made out of pixels. What if they were made of living creatures instead?&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;http://uri.cat/software/BugMirror/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>BugMirror is a different screen saver, as its packed with bugs. Nowadays screens are made out of pixels. What if they were made of living creatures instead?</summary></entry><entry><title>SF.net CCA 2007 Winner</title><id>https://digitalauthority.com.au//note/7zip-sourceforge-cca07/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/7zip-sourceforge-cca07/" /><published>2007-08-04T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;blockquote cite=&quot;https://sourceforge.net/blog/cca07/&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;The Community Choice Awards&lt;/strong&gt; are over! The SourceForge.net 2007 Community Choice Awards provided you an opportunity to recognize projects that stand taller than the rest. Everybody got to vote, and everybody’s vote counted equally. The winning projects, each with superlative quality, productivity, and ingenuity, represent the cream of the crop on SourceForge.net.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;7-Zip wins Best Technical Design: The project most likely to inspire awe with its technical perfection.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://sourceforge.net/blog/cca07/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>  The Community Choice Awards are over! The SourceForge.net 2007 Community Choice Awards provided you an opportunity to recognize projects that stand taller than the rest. Everybody got to vote, and everybody’s vote counted equally. The winning projects, each with superlative quality, productivity, and ingenuity, represent the cream of the crop on SourceForge.net.</summary></entry><entry><title>A New Keyboard</title><id>https://digitalauthority.com.au//note/a-new-keyboard/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/a-new-keyboard/" /><published>2007-07-28T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;https://www.cnet.com/products/microsoft-comfort-curve-keyboard-2000-series/&quot;&gt;Microsoft Comfort Curve Keyboard 2000&lt;/a&gt;, The whole keyboard is a curved shape, comfortable, ergonomically inspired contours, and it looks a little strange. It sounds lighter than my old Logitech keyboard. The bad is the keys feel a bit mushy, especially the space key.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Microsoft Comfort Curve Keyboard 2000, The whole keyboard is a curved shape, comfortable, ergonomically inspired contours, and it looks a little strange. It sounds lighter than my old Logitech keyboard. The bad is the keys feel a bit mushy, especially the space key.</summary></entry><entry><title>7-Zip Portable</title><id>https://digitalauthority.com.au//note/7-zip-portable/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/7-zip-portable/" /><published>2006-08-24T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p lang=&quot;zh&quot;&gt;對於那些不想安裝的人來說，用這個還是不錯的，放在 U 盤裡隨時用也挺方便&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://portableapps.com/apps/utilities/7-zip_portable&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>對於那些不想安裝的人來說，用這個還是不錯的，放在 U 盤裡隨時用也挺方便</summary></entry><entry><title>Segoe UI</title><id>https://digitalauthority.com.au//note/segoe-ui/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/segoe-ui/" /><published>2006-05-19T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p lang=&quot;zh&quot;&gt;在搞 Xinjustice 時，順便了解了一下字體，翻到 &lt;a href=&quot;https://blogs.msdn.microsoft.com/jensenh/2005/11/16/making-the-letters-better/&quot;&gt;Making the Letters Better&lt;/a&gt; 時發現 Segoe UI 與 Frutiger Next 異常的像，MS 承認 Segoe UI 就是 Frutiger Next，Segoe UI 也只是對 ClearType 做了優化而已&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>在搞 Xinjustice 時，順便了解了一下字體，翻到 Making the Letters Better 時發現 Segoe UI 與 Frutiger Next 異常的像，MS 承認 Segoe UI 就是 Frutiger Next，Segoe UI 也只是對 ClearType 做了優化而已</summary></entry><entry><title>Hello World</title><id>https://digitalauthority.com.au//note/hello-world/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//note/hello-world/" /><published>2005-10-21T00:00:00+08:00</published><updated>2014-04-01T00:58:16+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Yes, it’s me.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Yes, it’s me.</summary></entry></feed>

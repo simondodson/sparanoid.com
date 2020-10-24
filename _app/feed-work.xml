@@ -1,0 +1,1761 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>digital authority</title><subtitle>Digital Authority guide cultural, organizational and operational change of your legacy ecosystem through a smart integration of digital technologies, workflow, automation enhancing bottom line.</subtitle><updated>2020-09-15T04:34:13+08:00</updated><id>https://digitalauthority.com.au//</id><rights>Copyright © 2020, digital</rights><link rel="alternate" type="text/html" hreflang="en" href="https://digitalauthority.com.au//" /><link rel="self" type="application/atom+xml" href="https://digitalauthority.com.au//feed-work.xml" /><author><name>digital</name><uri>https://digitalauthority.com.au//</uri><email>simon@rite.io</email></author><entry><title>Media Auto Hash Rename</title><id>https://digitalauthority.com.au//work/media-auto-hash-rename/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/media-auto-hash-rename/" /><published>2019-04-05T00:00:00+08:00</published><updated>2019-06-15T13:09:04+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Media Auto Hash Rename will rename any file (specific files can be ignored by file extension) during upload, with unique, low collision hashes. Hash characters and length can be configured for even lower collision rate.&lt;/p&gt;
+
+&lt;p&gt;This plugin provides no configuration GUI to make it more easier to maintain with the future WordPress updates.&lt;/p&gt;
+
+&lt;p&gt;Currently there’re 3 constants you can configure in your &lt;code class=&quot;highlighter-rouge&quot;&gt;wp-config.php&lt;/code&gt;, I recommend WP-CLI for maintaining these constants.&lt;/p&gt;
+
+&lt;h2 id=&quot;mahr_length&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MAHR_LENGTH&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;length of the random hashes, (default to &lt;code class=&quot;highlighter-rouge&quot;&gt;8&lt;/code&gt;), longer can help reduce collision. Hashes at the length of 8 can be collision-free at the scale of 50,000 images).&lt;/p&gt;
+
+&lt;h2 id=&quot;mahr_chars&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MAHR_CHARS&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Characters used in hashes, default to &lt;code class=&quot;highlighter-rouge&quot;&gt;0123456789abcdefghijklmnopqrstuvwxyz_&lt;/code&gt;, You can add more characters like uppercased alphabelts to dramatically reduce the collision without increasing the length of your filenames. But please note that this option can be dangerous if you’re not familer with general URI encoding. So if you don’t know what characters are allowed in a filename, just keep it untouched and use the default option.&lt;/p&gt;
+
+&lt;h2 id=&quot;mahr_ignore&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MAHR_IGNORE&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;File extensions to be ignored, default to &lt;code class=&quot;highlighter-rouge&quot;&gt;pdf, zip&lt;/code&gt;, you can define a comma delimited list of file extensions to bypass renaming process of this plugin. All files that has the file extension you defined in the list will be ignored. Please note that:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;File extensions must be defined without the leading peroid, for example: &lt;code class=&quot;highlighter-rouge&quot;&gt;'pdf, 7z, bmp'&lt;/code&gt; works, &lt;code class=&quot;highlighter-rouge&quot;&gt;'.pdf, .7z, .bmp'&lt;/code&gt; does not.&lt;/li&gt;
+  &lt;li&gt;With (&lt;code class=&quot;highlighter-rouge&quot;&gt;'pdf, zip'&lt;/code&gt;) or without (&lt;code class=&quot;highlighter-rouge&quot;&gt;'pdf,zip'&lt;/code&gt;) space both work.&lt;/li&gt;
+  &lt;li&gt;If you define your own ignore list, default ignore list will be discarded. For example, if you define &lt;code class=&quot;highlighter-rouge&quot;&gt;'7z'&lt;/code&gt;, then &lt;code class=&quot;highlighter-rouge&quot;&gt;'pdf, zip'&lt;/code&gt; will be processed during upload. You need to reapply these extensions with your own: &lt;code class=&quot;highlighter-rouge&quot;&gt;'7z, pdf, zip'&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;If you don’t need to ignore any files by its extension. define an empty array &lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt; (without quotes) to this option: &lt;code class=&quot;highlighter-rouge&quot;&gt;define( 'MAR_IGNORE', [] );&lt;/code&gt; to force process PDF and ZIP files.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;/h2&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;What if I deactivate this plugin?&lt;/summary&gt;
+  &lt;p&gt;This pluigin, doesn't not write any extra data into your database. The files renamed by this plugin will still work after you deactivate this plugin.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&quot;downloads&quot;&gt;Downloads&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/media-auto-hash-rename/&quot; class=&quot;download&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A WordPress plugin that renames media filename during upload with unique hash.</summary></entry><entry><title>Omnibox NCR</title><id>https://digitalauthority.com.au//work/omnibox-ncr/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/omnibox-ncr/" /><published>2016-11-16T00:00:00+08:00</published><updated>2019-03-31T21:46:11+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;This extension, will force using google.com (aka Google No Country Redirect) when you search in Google Chrome Omnibox.&lt;/p&gt;
+
+&lt;p&gt;If you travel a lot, or you just care about privacy and use proxy to hide your real IP from another country, imagine you’re in China and using a Japanese proxy, Google always redirects you to google.co.jp when you search in Google Chrome Omnibox. This extension could definitely make your browser stick with google.com.&lt;/p&gt;
+
+&lt;h2 id=&quot;under-the-hood&quot;&gt;Under the Hood&lt;/h2&gt;
+
+&lt;p&gt;This extension simply replace the URL you request before &lt;code class=&quot;highlighter-rouge&quot;&gt;onBeforeRequest&lt;/code&gt; to google.com, no additional internet request will be made since the replace process will be done in 307 Internal Redirect.&lt;/p&gt;
+
+&lt;h2 id=&quot;downloads&quot;&gt;Downloads&lt;/h2&gt;
+
+&lt;div class=&quot;largetype&quot;&gt;
+  &lt;div&gt;&lt;a href=&quot;https://chrome.google.com/webstore/detail/kohddgnpofoogkkjejnmcgleamcfbhhc&quot;&gt;Add to Chrome&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;a href=&quot;https://github.com/sparanoid/omnibox-ncr&quot;&gt;View source at GitHub&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;love-this&quot;&gt;Love this?&lt;/h2&gt;
+
+&lt;p&gt;Please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Intro</summary></entry><entry><title>IKEA Stock Availability Checker</title><id>https://digitalauthority.com.au//work/ikea-stock-availability-checker/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/ikea-stock-availability-checker/" /><published>2016-04-06T00:00:00+08:00</published><updated>2019-03-31T21:46:11+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;Get all stock availability for current IKEA product in your selected country.&lt;/p&gt;
+
+&lt;h2 id=&quot;downloads&quot;&gt;Downloads&lt;/h2&gt;
+
+&lt;div class=&quot;largetype&quot;&gt;
+  &lt;div&gt;&lt;a href=&quot;https://chrome.google.com/webstore/detail/hjdnnkppfadnemodjjnbacnagkgbhekm&quot;&gt;Add to Chrome&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;love-this&quot;&gt;Love this?&lt;/h2&gt;
+
+&lt;p&gt;Please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Intro</summary></entry><entry><title>Lightense Images</title><id>https://digitalauthority.com.au//work/lightense-images/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/lightense-images/" /><published>2016-03-10T00:00:00+08:00</published><updated>2019-03-16T10:46:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;A dependency-free pure JavaScript image zooming library less than 2 KB (gzipped). Inspired by &lt;a href=&quot;https://github.com/fat/zoom.js&quot;&gt;fat/zoom.js&lt;/a&gt; and &lt;a href=&quot;https://github.com/tholman/intense-images&quot;&gt;tholman/intense-images&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This library is mainly used by &lt;a href=&quot;/lab/amsf/&quot;&gt;Almace Scaffolding&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;High performance&lt;/li&gt;
+  &lt;li&gt;One script, no additional dependencies, no bloated styles&lt;/li&gt;
+  &lt;li&gt;Safari &lt;code class=&quot;highlighter-rouge&quot;&gt;backdrop-filter&lt;/code&gt; support&lt;/li&gt;
+  &lt;li&gt;2 KB gzipped&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;install&quot;&gt;Install&lt;/h2&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lightense-images &lt;span class=&quot;nt&quot;&gt;--save&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Or download library and save it to your project&lt;/li&gt;
+  &lt;li&gt;Or host it on a CDN and reference it via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt; tag&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Lightense library is wrapped in Universal Module Syntax (UMD), this means that out of the box, you can include it into your web application via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt; tag, &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt;, or &lt;code class=&quot;highlighter-rouge&quot;&gt;require('lightense-images')&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;Configuration object:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;Lightense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;keyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;cubicBezier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;cubic-bezier(.2, 0, .1, 1)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;rgba(255, 255, 255, .98)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;zIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2147483647&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Inline data configurations:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;image.png&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data-lightense-padding=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;40&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data-lightense-cubic-bezier=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cubic-bezier(.2, 0, .1, 1)&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data-lightense-background=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rgba(255, 255, 255, .98)&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data-lightense-z-index=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2147483647&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;photo.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Lightense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/girls_dead_monster_logo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;custom-background-color&quot;&gt;Custom Background Color&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;screenshot.png&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-lightense-background=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rgba(0, 0, 0, .96)&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/railgun-logo.png&quot; data-background=&quot;rgba(23, 29, 54, .8)&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;custom-padding&quot;&gt;Custom Padding&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;screenshot.png&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-lightense-padding=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-logo.png&quot; data-padding=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;disable-lightense-for-specific-elements&quot;&gt;Disable Lightense for Specific Elements&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;photo.jpg&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;no-lightense&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Lightense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;img:not(.no-lightense)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/imouto-logo-large.png&quot; class=&quot;no-lightense&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;custom-event-hooks&quot;&gt;Custom Event Hooks&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://d349cztnlupsuf.cloudfront.net/girls_dead_monster_logo.png&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;before-show-alert=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Showing!&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;after-show-alert=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Showed!&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;before-hide-alert=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hiding!&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;after-hide-alert=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hidden!&quot;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Lightense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;img:not(.no-lightense),.lightense&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;beforeShow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beforeShowAttr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;before-show-alert&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;beforeShowAttr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;beforeShowAttr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;afterShow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;afterShowAttr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;after-show-alert&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;afterShowAttr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;afterShowAttr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;beforeHide&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beforeHideMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;before-hide-alert&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;beforeHideMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;beforeHideMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;afterHide&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;afterHideMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;after-hide-alert&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;afterHideMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;afterHideMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;download&quot;&gt;Download&lt;/h2&gt;
+
+&lt;div class=&quot;largetype&quot;&gt;
+  &lt;div&gt;&lt;a href=&quot;https://github.com/sparanoid/lightense-images&quot;&gt;Github&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;browser-support&quot;&gt;Browser Support&lt;/h2&gt;
+
+&lt;p&gt;All modern browsers, it “should work” in Internet Explorer 10 and up as well.&lt;/p&gt;
+
+&lt;h2 id=&quot;love-this&quot;&gt;Love this?&lt;/h2&gt;
+
+&lt;p&gt;Please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A dependency-free pure JavaScript image zooming library less than 2 KB (gzipped). Inspired by fat/zoom.js and tholman/intense-images.</summary></entry><entry><title>Almace Scaffolding</title><id>https://digitalauthority.com.au//work/almace-scaffolding/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/almace-scaffolding/" /><published>2015-09-09T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;AMSF, a.k.a. Almace Scaffolding, is a super-fast Jekyll framework, supports live reloading (Browsersync), Less, HTML minification, inlined stylesheets and more.&lt;/p&gt;
+
+&lt;p&gt;Go to the &lt;a href=&quot;/lab/amsf/&quot;&gt;project page&lt;/a&gt; for more information.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;/lab/amsf/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>AMSF, a.k.a. Almace Scaffolding, is a super-fast Jekyll framework, supports live reloading (Browsersync), Less, HTML minification, inlined stylesheets and more.</summary></entry><entry><title>Slimpack</title><id>https://digitalauthority.com.au//work/slimpack/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/slimpack/" /><published>2015-09-08T00:00:00+08:00</published><updated>2019-04-05T23:54:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;blockquote&gt;
+  &lt;p&gt;This plugin is no longer maintained.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Slimpack — Lightweight Jetpack. Super-fast performance without modules that require contracting WordPress.com.&lt;/p&gt;
+
+&lt;p&gt;It provides better performance than original Jetpack. All features that require a WordPress.com account or need contracting / syncing back to WordPress.com servers have been removed. You don’t need to connect to WordPress.com to use this plugin. If your site got slow response time (TTFB) after activating the original Jetpack, you should definitely try out this plugin.&lt;/p&gt;
+
+&lt;h3 id=&quot;features&quot;&gt;Features&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Transfer from Jetpack to Slimpack seamlessly, just deactivate Jetpack and activate Slimpack, all settings and module status will be kept and work just like before.&lt;/li&gt;
+  &lt;li&gt;All source code is untouched and synced from Jetpack&lt;/li&gt;
+  &lt;li&gt;Better performance than original Jetpack. All features that require a WordPress.com account have been removed. You don’t need to connect to WordPress.com to use this plugin.&lt;/li&gt;
+  &lt;li&gt;Multilingual support (and languages have already bundled in Slimpack!)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://wordpress.org/plugins/slimpack/&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+&lt;p&gt;Love this plugin? please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/slimpack/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Slimpack — Lightweight Jetpack. Super-fast performance without modules that require contracting WordPress.com.</summary></entry><entry><title>iTunes Artwork Grabber</title><id>https://digitalauthority.com.au//work/itunes-artwork-grabber/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/itunes-artwork-grabber/" /><published>2015-04-21T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;blockquote&gt;
+  &lt;p&gt;(Yet Another) iTunes Artwork Grabber&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;Get high-res artwork for apps, music, books, movies, TV shows, podcasts and more, all types supported. Works with Safari, Google Chrome, and Greasemonkey / Tampermonkey / Scriptish / etc.&lt;/p&gt;
+
+&lt;h2 id=&quot;supported-types&quot;&gt;Supported Types&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;iOS app icons&lt;/li&gt;
+  &lt;li&gt;OS X app icons&lt;/li&gt;
+  &lt;li&gt;Music album covers&lt;/li&gt;
+  &lt;li&gt;Music video thumbnails&lt;/li&gt;
+  &lt;li&gt;Book covers&lt;/li&gt;
+  &lt;li&gt;Movie posters&lt;/li&gt;
+  &lt;li&gt;TV show covers&lt;/li&gt;
+  &lt;li&gt;Podcast covers&lt;/li&gt;
+  &lt;li&gt;iTunes U resource covers&lt;/li&gt;
+  &lt;li&gt;Audiobook covers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;unsupported-types&quot;&gt;Unsupported Types&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;None! (since Nov 27, 2016)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;demo&quot;&gt;Demo&lt;/h2&gt;
+
+&lt;p&gt;Try this fancy &lt;a href=&quot;https://www.youtube.com/watch?v=8NVyzKb7VIY&quot;&gt;video demo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;downloads&quot;&gt;Downloads&lt;/h2&gt;
+
+&lt;div class=&quot;largetype&quot;&gt;
+  &lt;div&gt;&lt;a href=&quot;https://chrome.google.com/webstore/detail/pjdeblccplohlgedbefopohaedodcgci&quot;&gt;Add to Chrome&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;a href=&quot;https://greasyfork.org/en/scripts/8947-itunes-artwork-grabber-by-tunghsiao-liu&quot;&gt;Download via Greasy Fork&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;a href=&quot;https://openuserjs.org/scripts/sparanoid/iTunes_Artwork_Grabber_by_Tunghsiao_Liu&quot;&gt;Download via OpenUserJS&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;a href=&quot;https://github.com/sparanoid/itunes-artwork-grabber&quot;&gt;View source at GitHub&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;love-this&quot;&gt;Love this?&lt;/h2&gt;
+
+&lt;p&gt;Please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>  (Yet Another) iTunes Artwork Grabber</summary></entry><entry><title>Disable WYSIWYG</title><id>https://digitalauthority.com.au//work/disable-wysiwyg/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/disable-wysiwyg/" /><published>2014-09-08T00:00:00+08:00</published><updated>2019-04-05T23:54:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;You clients are always using the crappy visual editor in your WordPress? They always paste shitty formatted texts from the internet? They also edit your posts and fuck it up? Then you should try this plugin.&lt;/p&gt;
+
+&lt;p&gt;Disable WYSIWYG sets &lt;code class=&quot;highlighter-rouge&quot;&gt;user_can_richedit&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt; that disables TinyMCE Visual Editor (WYSIWYG editor) totally completely permanently forever. This plugin also works fine with multisite enabled WordPress (aka. WordPress Mu). If you love this plugin, please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://wordpress.org/plugins/disable-wysiwyg/&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/disable-wysiwyg/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A WordPress plugin that sets user_can_richedit to false to disable TinyMCE Visual Editor (WYSIWYG editor) totally completely permanently forever.</summary></entry><entry><title>AVOS Cloud</title><id>https://digitalauthority.com.au//work/avoscloud/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/avoscloud/" /><published>2014-05-16T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;https://avoscloud.com&quot;&gt;AVOS Cloud&lt;/a&gt;, one of the most famous Chinese local (m)BaaS platform. Me and the whole team have been working on this project since last year. Now it's a spin-off of &lt;a href=&quot;https://web.archive.org/web/20131201010958/http://www.avos.com/&quot;&gt;AVOS Systems, Inc.&lt;/a&gt; focuses on tech startups and local companies in China.&lt;/p&gt;
+
+&lt;p&gt;I'm working on this site as a &quot;hybird&quot; designer to create eye-catching interactions and provide easy-to-use dashboard for every developer.&lt;/p&gt;
+
+&lt;h2&gt;AVOS Cloud Homepage&lt;/h2&gt;
+&lt;p&gt;The background cubes are animated and written in pure CSS, the color schemes of the page can also be changed according to different slices. You can check out &lt;a href=&quot;https://codepen.io/sparanoid/pen/axiKF&quot;&gt;this pen&lt;/a&gt; for a simple 3D cubes demo.&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-01-cropped.png&quot; alt=&quot;AVOS Cloud Homepage Slides #1&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-02-cropped.png&quot; alt=&quot;AVOS Cloud Homepage Slides #2&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-03-cropped.png&quot; alt=&quot;AVOS Cloud Homepage Slides #3&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-04-cropped.png&quot; alt=&quot;AVOS Cloud Homepage Slides #4&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-05-cropped.png&quot; alt=&quot;AVOS Cloud Homepage Slides #5&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;AVOS Cloud Features Page&lt;/h2&gt;
+&lt;p&gt;A full features list providing Overview, How it Works, and Resources.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-features-small-merged.jpg&quot; alt=&quot;AVOS Cloud Features Overview&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-features-01.png&quot; alt=&quot;AVOS Cloud Features Slides #1&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-features-02.png&quot; alt=&quot;AVOS Cloud Features Slides #2&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-features-03.png&quot; alt=&quot;AVOS Cloud Features Slides #3&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-features-04.png&quot; alt=&quot;AVOS Cloud Features Slides #4&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;AVOS Cloud Pricing Page&lt;/h2&gt;
+&lt;p&gt;The pricing modal can slide out without redirecting to another page. Color schemes of this modal are dynamic, too.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-pricing-merged-new.jpg&quot; alt=&quot;Delicious Landing Page&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-pricing-new-01.png&quot; alt=&quot;AVOS Cloud Pricing Slides #1&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-pricing-new-02.png&quot; alt=&quot;AVOS Cloud Pricing Slides #2&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-pricing-new-03.png&quot; alt=&quot;AVOS Cloud Pricing Slides #3&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-pricing-new-04.png&quot; alt=&quot;AVOS Cloud Pricing Slides #4&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/avoscloud-homepage-pricing-new-05.png&quot; alt=&quot;AVOS Cloud Pricing Slides #5&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://avoscloud.com/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>AVOS Cloud, one of the most famous Chinese local (m)BaaS platform. Me and the whole team have been working on this project since last year. Now it's a spin-off of AVOS Systems, Inc. focuses on tech startups and local companies in China.</summary></entry><entry><title>Space Lover</title><id>https://digitalauthority.com.au//work/space-lover/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/space-lover/" /><published>2014-03-26T00:00:00+08:00</published><updated>2019-04-05T23:54:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;This plugin magically adds an extra space between Chinese characters and English letters / numbers / common punctuation marks. A must-have plugin if you’re running a Chinese blog. This plugin also works fine with multisite enabled WordPress (aka. WordPress Mu).&lt;/p&gt;
+
+&lt;p&gt;No options, no additional database inserts, no stupid banners and shitty ads, install and go.&lt;/p&gt;
+
+&lt;p&gt;你客戶／合作夥伴不光文案寫的爛，而且還不會排版？Space Lover 可以幫到你。它會神奇的在中文、日文和英文、數字、符號之間自動加入空白，讓客戶網站的文案、文章看上去規範整潔。&lt;/p&gt;
+
+&lt;p&gt;無選項、無 MySQL 插入，無廣告，安裝即用。&lt;/p&gt;
+
+&lt;p&gt;覺得這招治標不治本？也可以試試 &lt;a href=&quot;/note/chinese-copywriting-guidelines/&quot;&gt;Chinese Copywriting Guidelines&lt;/a&gt;，讓你的客戶／合作夥伴學會如何正確的排版。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Before&lt;/span&gt;
+今天出去買菜花了5000元
+
+&lt;span class=&quot;c&quot;&gt;# After&lt;/span&gt;
+今天出去買菜花了 5000 元
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;Compatible with multisite?&lt;/summary&gt;
+  &lt;p&gt;Yes.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;Can I activate Space Lover and Space Lover Lite at the same time?&lt;/summary&gt;
+  &lt;p&gt;Yes.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;Differences between Space Lover and Space Lover Lite?&lt;/summary&gt;
+  &lt;ul&gt;
+    &lt;li&gt;The new Space Lover (since v1.0.5) uses PHP regex to replace output contents.&lt;/li&gt;
+    &lt;li&gt;Space Lover Lite just inserts one script to dynamic add spaces.&lt;/li&gt;
+    &lt;li&gt;Space Lover changes your post output in your themes, RSS output&lt;/li&gt;
+    &lt;li&gt;Space Lover Lite only changes what you see, the post output is untouched, so you’ll still get original post contents in your RSS feeds, however this method is slightly safer than Space Lover.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/details&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;Space Lover 與 Space Lover Lite 的區別？&lt;/summary&gt;
+  &lt;ul&gt;
+    &lt;li&gt;新版 Space Lover（v1.0.5）使用 PHP 的正則替換文章的輸出內容&lt;/li&gt;
+    &lt;li&gt;Space Lover Lite 只插入 JavaScript 腳本，動態添加空格&lt;/li&gt;
+    &lt;li&gt;Space Lover 會修改所有文章的輸出形式，例如用戶所看到的頁面，RSS 輸出等&lt;/li&gt;
+    &lt;li&gt;Space Lover Lite 只會改變您在網站上看到的形式，而文章本身的內容是沒有被修改過的，所以使用此擴展時，RSS 的輸出並不會產生變化，唯一的優點是，這種方法與 Space Lover 比較相對安全，不會有內容被錯誤替換的可能。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/details&gt;
+
+&lt;p&gt;If you love this plugin, please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/space-lover/&quot; class=&quot;download&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/corner-bracket-lover/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>This WordPress plugin magically adds an extra space between Chinese characters and English letters / numbers / common punctuation marks</summary></entry><entry><title>Moonstruck Princess Extended</title><id>https://digitalauthority.com.au//work/moonstruck-princess-ext/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/moonstruck-princess-ext/" /><published>2014-01-06T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-bw.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-bw.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-red.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-red.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-orange.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-orange.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-yellow.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-yellow.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-green.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-green.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-blue.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-blue.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-purple.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-purple.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-gray.png&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-ext-gray.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;Moonstruck Princess Extended (Remix) version, click the images above to download the wallpapers. (4K, 5136 &amp;times; 2160)&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Moonstruck princess in my dream, inspired by you.</summary></entry><entry><title>Delicious Redesign</title><id>https://digitalauthority.com.au//work/delicious/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/delicious/" /><published>2013-11-01T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20131214223249/https://delicious.com/&quot;&gt;Delicious&lt;/a&gt; (aka. del.icio.us) is a social bookmarking web service for storing, sharing, and discovering web bookmarks that first launched back in 2003. In 2005 it was acquired by Yahoo and later sold to AVOS Systems Inc. The website’s design hasn’t changed very much since its last redesign in 2011.&lt;/p&gt;
+
+&lt;p&gt;This year, to celebrate its ten year anniversary, AVOS invited me to join the Delicious team, I do designs and front-end stuff, collaborated with the developer &lt;a href=&quot;https://sunng.info/&quot;&gt;Ning Sun&lt;/a&gt; (&lt;a href=&quot;/work/readwise/&quot;&gt;again&lt;/a&gt;) from AVOS on this project.&lt;/p&gt;
+
+&lt;p&gt;Update: Delicious now has been acquired by &lt;a href=&quot;https://science-inc.com/&quot;&gt;Science Inc.&lt;/a&gt; &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious New Logo&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-logo.png&quot; alt=&quot;Delicious New Logo&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious Iconset&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-iconset.png&quot; alt=&quot;Delicious Iconset&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious UI Preview&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com.png&quot; alt=&quot;Delicious UI Preview&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some fun facts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Brand-new brighter version of Delicious logo. (Time took: 5 minutes)&lt;/li&gt;
+  &lt;li&gt;No images used on this project. all styles are served by a ~23 KB gzipped CSS file. Hum, okay, there’s only one icon font and some SVG graphics and&amp;hellip;&lt;/li&gt;
+  &lt;li&gt;The new design is responsive, I even spent more time on the mobile viewport, or I can say, it’s a mobile-first design. Try it out on your iPhone, it works smooth and intuitive.&lt;/li&gt;
+  &lt;li&gt;Delicious logo is made of pure CSS.&lt;/li&gt;
+  &lt;li&gt;I didn’t write any vendor prefix for this project. (Or let me say: &lt;a href=&quot;https://github.com/ai/autoprefixer&quot;&gt;Autoprefixer&lt;/a&gt; rocks).&lt;/li&gt;
+  &lt;li&gt;We use Application Cache to speed up the page load times.&lt;/li&gt;
+  &lt;li&gt;We use &lt;a href=&quot;https://gruntjs.com/&quot;&gt;Grunt&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;I worked remotely (from home) for all these things.&lt;/li&gt;
+  &lt;li&gt;The author of &lt;a href=&quot;https://abookapart.com/products/mobile-first&quot;&gt;Mobile First&lt;/a&gt;, former Yahoo! design architect, &lt;a href=&quot;https://www.lukew.com/&quot;&gt;Luke Wroblewski&lt;/a&gt; also &lt;a href=&quot;https://twitter.com/lukew/status/384744062361686017&quot;&gt;tweeted&lt;/a&gt; about it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Delicious Landing Page&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-homepage.png&quot; alt=&quot;Delicious Landing Page&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious Landing Page (Mouseover)&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-homepage-hover.png&quot; alt=&quot;Delicious Landing Page (Mouseover)&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;More Screenshots: Delicious Login Window&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-01.png&quot; alt=&quot;Delicious Login Window&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious Signup Form&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-02.png&quot; alt=&quot;Delicious Signup Form&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Useful Tools&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-03.png&quot; alt=&quot;Delicious - Useful Tools&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Developing for Delicious&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-04.png&quot; alt=&quot;Delicious - Developing for Delicious&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - About&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-05.png&quot; alt=&quot;Delicious - About&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - My Links&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-06.png&quot; alt=&quot;Delicious - My Links&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Manage Subscriptions&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-07.png&quot; alt=&quot;Delicious - Manage Subscriptions&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Search&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-08.png&quot; alt=&quot;Delicious - Search&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Share a Link&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-09.png&quot; alt=&quot;Delicious - Share a Link&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Edit a Link&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-10.png&quot; alt=&quot;Delicious - Edit a Link&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Mass Edit Links&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-11.png&quot; alt=&quot;Delicious - Mass Edit Links&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Delicious - Keyboard Shortcuts&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/delicious.com-screenshot-12.png&quot; alt=&quot;Delicious - Keyboard Shortcuts&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Science Inc., a tech advisory firm run by former Myspace chief Michael Jones, confirmed the deal in a &lt;a href=&quot;https://web.archive.org/web/20140719033531/http://science-inc.com/about/blog/2014/05/08/welcome-delicious-as-the-cornerstone-asset-of-our-new-data-content-group/&quot;&gt;blog post&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20131214223249/https://delicious.com/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Delicious (aka. del.icio.us) is a social bookmarking web service for storing, sharing, and discovering web bookmarks that first launched back in 2003. In 2005 it was acquired by Yahoo and later sold to AVOS Systems Inc. The website’s design hasn’t changed very much since its last redesign in 2011.</summary></entry><entry><title>Tianjin Project Revision</title><id>https://digitalauthority.com.au//work/tianjin-project-revision/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/tianjin-project-revision/" /><published>2013-10-29T00:00:00+08:00</published><updated>2016-03-10T22:35:11+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;This is just another revision for the original &lt;a href=&quot;/work/tianjin-project/&quot;&gt;Tianjin Project&lt;/a&gt;, optimized for recently introduced iBooks for OS X. I also redesigned a new cover for it.&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;
+  &lt;a href=&quot;https://itunes.apple.com/us/book/tianjin/id1050471618?mt=13&quot;&gt;Read it on your Mac&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;h2&gt;Index Overview&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-01.jpg&quot; alt=&quot;Index Overview&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-02.jpg&quot; alt=&quot;Table of Contents&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Bookmarks&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-03.jpg&quot; alt=&quot;Bookmarks&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Full-context Search&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-04.jpg&quot; alt=&quot;Full-context Search&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Sharing notes&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-05.jpg&quot; alt=&quot;Sharing notes&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Glossary&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-06.jpg&quot; alt=&quot;Glossary&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Glossary List&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-07.jpg&quot; alt=&quot;Glossary List&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Study Cards&lt;/h2&gt;
+&lt;p class=&quot;screenshot-mac&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-revision-el-capitan-08.jpg&quot; alt=&quot;Study Cards&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;You can also view the &lt;a href=&quot;/work/tianjin-project/&quot;&gt;original version&lt;/a&gt; of this project.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>This is just another revision for the original Tianjin Project, optimized for recently introduced iBooks for OS X. I also redesigned a new cover for it.</summary></entry><entry><title>IterCast</title><id>https://digitalauthority.com.au//work/itercast/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/itercast/" /><published>2013-08-07T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20140207233511/http://itercast.com/&quot;&gt;IterCast&lt;/a&gt; (previous LinuxCast), An an online interactive education platform that offers coding courses in programming languages like Python, JavaScript, and Objective-C, database management courses such as MySQL and Oracle, Cisco Career certifications such as CCNA and CCNP Security, as well as markup languages such as HTML and CSS. All classes are free to everyone. I do design and front-end stuff for this project.&lt;/p&gt;
+
+&lt;p&gt;Update: this project is now been discontinued, but you can see a cached site from my website.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/itercast-banners-2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/itercast-icons-2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/itercast-01.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of my favorite part of this project is the error pages, You really should check out the animated version:&lt;/p&gt;
+
+&lt;p class=&quot;browser&quot;&gt;&lt;a href=&quot;/lab/itercast/error-404-403.html&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/itercast-02.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p class=&quot;browser&quot;&gt;&lt;a href=&quot;/lab/itercast/error-503.html&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/itercast-03.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;/lab/itercast/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>IterCast (previous LinuxCast), An an online interactive education platform that offers coding courses in programming languages like Python, JavaScript, and Objective-C, database management courses such as MySQL and Oracle, Cisco Career certifications such as CCNA and CCNP Security, as well as markup languages such as HTML and CSS. All classes are free to everyone. I do design and front-end stuff for this project.</summary></entry><entry><title>Kai Series</title><id>https://digitalauthority.com.au//work/kai/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/kai/" /><published>2013-03-23T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;「改」Series (a.k.a. Kai), is a series of the missing child themes for WordPress default theme &lt;a href=&quot;https://wordpress.org/extend/themes/twentytwelve&quot;&gt;Twenty Twelve&lt;/a&gt;, &lt;a href=&quot;https://wordpress.org/extend/themes/twentyeleven&quot;&gt;Twenty Eleven&lt;/a&gt;, and &lt;a href=&quot;https://wordpress.org/extend/themes/twentyten&quot;&gt;Twenty Ten&lt;/a&gt;. The suffix “Kai” of this series is inspired from Japanese anime &lt;a href=&quot;http://www.toei-anim.co.jp/tv/dragon_kai/&quot;&gt;ドラゴンボール改&lt;/a&gt; (a.k.a. Dragon Ball Kai).&lt;/p&gt;
+
+&lt;h2&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Written in &lt;a href=&quot;https://sass-lang.com/&quot;&gt;Sass&lt;/a&gt; (Kai 12) and &lt;a href=&quot;https://lesscss.org/&quot;&gt;Less&lt;/a&gt; (others), no IE support&lt;/li&gt;
+  &lt;li&gt;Better font stack for Chinese, Japanese and other asian languages&lt;/li&gt;
+  &lt;li&gt;Better code snippets style&lt;/li&gt;
+  &lt;li&gt;Adds &lt;code&gt;.well&lt;/code&gt; block inspired by &lt;a href=&quot;https://getbootstrap.com/&quot;&gt;Bootstrap&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Fix media query issue&lt;/li&gt;
+  &lt;li&gt;Theme updater support&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;downloads&quot;&gt;Downloads&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wordpress.org/themes/kai-12/&quot;&gt;Kai 12&lt;/a&gt;, (&lt;a href=&quot;https://github.com/sparanoid/kai-12&quot;&gt;source code&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/kai-11.zip&quot;&gt;Kai 11&lt;/a&gt;, (&lt;a href=&quot;https://github.com/sparanoid/kai-11&quot;&gt;source code&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/kai-10.zip&quot;&gt;Kai 10&lt;/a&gt;, (&lt;a href=&quot;https://github.com/sparanoid/kai-10&quot;&gt;source code&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;/h2&gt;
+
+&lt;p&gt;Q: “Why not submit these themes to WordPress.org official repository?”&lt;/p&gt;
+
+&lt;p&gt;A: Their theme reviewer thinks my theme “just offer a few minor CSS tweaks and adds new footer credit links” &lt;a href=&quot;https://themes.trac.wordpress.org/ticket/10728&quot;&gt;#&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Update: After a &lt;a href=&quot;https://themes.trac.wordpress.org/ticket/61256&quot;&gt;3-month long review&lt;/a&gt;, Kai 12 is now listed on official WordPress theme directory.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>The missing child themes for your WordPress default theme Twenty Twelve, Twenty Eleven and Twenty Ten</summary></entry><entry><title>ReadWise</title><id>https://digitalauthority.com.au//work/readwise/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/readwise/" /><published>2012-12-13T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;As known as 「美味爱读」. An online reading web app by AVOS System, Inc. I do design and front-end stuff and teamed up with &lt;a href=&quot;https://sunng.info/&quot;&gt;Sun Ning&lt;/a&gt; for this project.&lt;/p&gt;
+
+&lt;p&gt;An interesting thing I’d have to mention is sooner after we launched this project Google announced to close Google Reader on July 1.&lt;/p&gt;
+
+&lt;p&gt;Note: this project is now closed, but you can see a cached homepage from my website.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;/lab/readwise/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>As known as 「美味爱读」. An online reading web app by AVOS System, Inc. I do design and front-end stuff and teamed up with Sun Ning for this project.</summary></entry><entry><title>Corner Bracket Lover</title><id>https://digitalauthority.com.au//work/corner-bracket-lover/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/corner-bracket-lover/" /><published>2012-12-12T00:00:00+08:00</published><updated>2019-04-05T23:54:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;b&gt;Corner Bracket Lover&lt;/b&gt; is a WordPress plugin to convert all curly quotation marks (&lt;code&gt;“”&lt;/code&gt; and &lt;code&gt;‘’&lt;/code&gt;) in your posts to traditional corner brackets (&lt;code&gt;「」&lt;/code&gt; and &lt;code&gt;『』&lt;/code&gt;). A must-have plugin if you're a Chinese writer or just a corner brackets lover. This plugin also works fine with multisite enabled WordPress (aka. WordPress Mu). If you love this plugin, please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://wordpress.org/extend/plugins/corner-bracket-lover/&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/corner-bracket-lover/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A WordPress plugin to convert all curly quotation marks in your posts to traditional corner brackets.</summary></entry><entry><title>Instagram Badges</title><id>https://digitalauthority.com.au//work/instagram-badges/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/instagram-badges/" /><published>2012-11-25T00:00:00+08:00</published><updated>2019-10-19T20:58:28+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Adds &lt;a href=&quot;https://blog.instagram.com/post/36222022872/introducing-instagram-badges&quot;&gt;Instagram badges&lt;/a&gt; to your WordPress blog that will help you link to and promote your Instagram profile. A must-have plugin if you’re a photo lover. This plugin also works fine with multisite enabled WordPress (aka. WordPress Mu). If you love this plugin, please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wordpress.org/extend/plugins/instagram-badges/&quot; class=&quot;download&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+&lt;p&gt;Update Oct 19, 2019:&lt;/p&gt;
+
+&lt;p&gt;As of August 9, 2019, this plugin has been taken down by Facebook. Here’s the full disclosure forwarded from WordPress:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;From: WordPress.org Plugin Directory &amp;lt;plugins@wordpress.org&amp;gt;&lt;/li&gt;
+  &lt;li&gt;To: Tunghsiao Liu &amp;lt;t@sparanoid.com&amp;gt;&lt;/li&gt;
+  &lt;li&gt;Subject: [WordPress Plugin Directory] Notice: Instagram Badges&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;We have been required by Facebook (who owns Instagram, Facebook, WhatsApp, and many other trademarks) to close your plugin. Their notice detailing why is included below. You must comply with their request and update your plugin in order for us to restore it.&lt;/p&gt;
+
+  &lt;p&gt;Please understand, we have been legally compelled to do this, and have no ability to protect you from their demands. Trademark law is not something we can argue. When they demand takedown, we’re forced to comply regardless of if we agree with it.&lt;/p&gt;
+
+  &lt;p&gt;If you want more details about their requirements, you’ll need to contact them directly. We strongly recommend going above and beyond, and just NOT using the company name, any of their logos, a screenshot that includes their product, or anything even closely related to that in your work.&lt;/p&gt;
+
+  &lt;p&gt;Note that they no longer permit the use of their WORDMARK in your display name, which includes the words Instagram, Facebook, Insta, and Gram. So that means no, you cannot use “for Instagram” anymore.&lt;/p&gt;
+
+  &lt;p&gt;Be advised, after this if they reach out to us and request we close your plugin again, it will be a permanent closure.&lt;/p&gt;
+
+  &lt;p&gt;Here is the email from Facebook:&lt;/p&gt;
+
+  &lt;p&gt;From: Lopez, Lidia
+Sent: Thursday, June 13, 2019 3:26 PM
+To: ‘plugins@wordpress.org’ &lt;a href=&quot;mailto:plugins@wordpress.org&quot;&gt;plugins@wordpress.org&lt;/a&gt;
+Cc: Caplan, David &lt;a href=&quot;mailto:DCaplan@kilpatricktownsend.com&quot;&gt;DCaplan@kilpatricktownsend.com&lt;/a&gt;; Maxim, Trevor &lt;a href=&quot;mailto:TMaxim@kilpatricktownsend.com&quot;&gt;TMaxim@kilpatricktownsend.com&lt;/a&gt;; 1098547 - USE ENFORCEMENT RE: &amp;gt; MOBILE APP… &lt;a href=&quot;mailto:1098547.eml.townsend@wcs.kilpatricktownsend.com&quot;&gt;1098547.eml.townsend@wcs.kilpatricktownsend.com&lt;/a&gt;
+Subject: Infringement of Instagram’s Intellectual Property &amp;amp; Brand Violation - “Instagram Badges” on WordPress&lt;/p&gt;
+
+  &lt;p&gt;Via Email
+Wordpress.org
+plugins@wordpress.org
+Re: Infringement of Instagram’s Intellectual Property &amp;amp; Brand Violation - “Instagram Badges” on WordPress&lt;/p&gt;
+
+  &lt;p&gt;Dear Wordpress.org:
+We are outside intellectual property counsel to Instagram, LLC (“Instagram”), the world-famous photo/video sharing and editing service, application, and social network. We have been entrusted by our client to keep an eye out for anything that might create confusion with its registered trademarks. We are writing with regard to the unauthorized use of Instagram’s trademarks in connection a plugin offered on Wordpress.org. As you are undoubtedly aware, Instagram is the owner and operator of the world famous social network and online platform. Through its marketing efforts and commercial success, among other ways, Instagram owns and has developed valuable trademark rights in its INSTAGRAM, INSTA, GRAM, and Design marks in connection with online social networking services (collectively the “Instagram Marks”). A list of relevant trademark registrations, along with links to where those registrations can be accessed, is below for your ease of reference:&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Marks&lt;/th&gt;
+        &lt;th&gt;Reg. Nos.&lt;/th&gt;
+        &lt;th&gt;tsdr.uspto.gov Case No.&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;INSTAGRAM&lt;/td&gt;
+        &lt;td&gt;5260677&lt;/td&gt;
+        &lt;td&gt;87299078&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;INSTAGRAM&lt;/td&gt;
+        &lt;td&gt;5181545&lt;/td&gt;
+        &lt;td&gt;87166620&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/instagram-001-1.jpg&quot; alt=&quot;Instagram Logo&quot; class=&quot;no-enlarge&quot; /&gt;&lt;/td&gt;
+        &lt;td&gt;5399503&lt;/td&gt;
+        &lt;td&gt;87299113&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/instagram-001-2.jpg&quot; alt=&quot;Instagram Logo&quot; class=&quot;no-enlarge&quot; /&gt;&lt;/td&gt;
+        &lt;td&gt;5424416&lt;/td&gt;
+        &lt;td&gt;87234699&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/instagram-002-1.jpg&quot; alt=&quot;Instagram Logo&quot; class=&quot;no-enlarge&quot; /&gt;&lt;/td&gt;
+        &lt;td&gt;5399502&lt;/td&gt;
+        &lt;td&gt;87299098&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/instagram-002-2.jpg&quot; alt=&quot;Instagram Logo&quot; class=&quot;no-enlarge&quot; /&gt;&lt;/td&gt;
+        &lt;td&gt;5198386&lt;/td&gt;
+        &lt;td&gt;87035927&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/instagram-003-1.jpg&quot; alt=&quot;Instagram Logo&quot; class=&quot;no-enlarge&quot; /&gt;&lt;/td&gt;
+        &lt;td&gt;5351389&lt;/td&gt;
+        &lt;td&gt;87035955&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/instagram-003-2.jpg&quot; alt=&quot;Instagram Logo&quot; class=&quot;no-enlarge&quot; /&gt;&lt;/td&gt;
+        &lt;td&gt;5351388&lt;/td&gt;
+        &lt;td&gt;87035950&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;p&gt;Based on the foregoing rights, it is a violation of federal and state law for others to advertise, utilize, offer for sale, and/or engage in services using the Instagram Marks without the express authorization of Instagram.
+As a responsible brand owner, Instagram must protect consumers from confusion and prevent dilution of its famous marks. Using a name that includes ‘Instagram,’
+‘IG’, ‘Insta’ or ‘Gram,’ and/or Instagram’s logos or stylized font may be confusing to people or may make it harder for them to distinguish between different websites, apps, and services.
+Nevertheless, it has come to our client’s attention that a developer going by the name of “Tunghsiao Liu” is offering an Instagram Plugin called “Instagram Badges” available at h https://wordpress.org/plugins/instagram-badges/, using the INSTAGRAM mark and Camera Glyph Logo (see screenshot below).&lt;/p&gt;
+
+  &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/instagram-badges-takedown.jpg&quot; alt=&quot;Instagram Badges on WordPress.org&quot; class=&quot;no-enlarge&quot; /&gt;&lt;/p&gt;
+
+  &lt;p&gt;As a result, Instagram is concerned that users are likely to believe that the plugin is published, sponsored, endorsed by, or associated with Instagram, when that is not the case. Not only does such conduct constitute a violation of federal and state trademark laws, it is also a violation of (1) Instagram’s Brand Guidelines, available at https://www.instagram-brand.com, and (2) the WordPress Terms of Service, which provide that users “[w]ill not infringe or misappropriate the intellectual property rights of any third party.”
+Instagram diligently enforces its rights in and to the Instagram Marks in all forms and rightfully takes its responsibility for the protection of those marks very seriously. Accordingly, we request your assistance removing the infringements of Instagram Marks in connection with the Infringing Plugins as described above.
+I have a good faith belief that the use of the trademarks as described above is an infringement of the rights granted under the United States and/or foreign trademark law. I further understand that copy of this notice, including any contact information provided in my signature line below, will or may be forwarded to the plugin owner.
+Nothing contained in this letter constitutes an express or implied waiver of any rights, remedies, or defenses of Instagram, all of which are expressly reserved.
+Very truly yours,
+/s/ Lidia Lopez&lt;/p&gt;
+
+  &lt;p&gt;–
+WordPress Plugin Review Team | plugins@wordpress.org
+https://make.wordpress.org/plugins/
+https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/&lt;/p&gt;
+&lt;/blockquote&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/instagram-badges/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Adds Instagram badges to your WordPress blog that will help you link to and promote your Instagram profile.</summary></entry><entry><title>Relative URL</title><id>https://digitalauthority.com.au//work/relative-url/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/relative-url/" /><published>2012-09-16T00:00:00+08:00</published><updated>2019-04-05T23:54:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;strong&gt;Relative URL&lt;/strong&gt; is a WordPress plugin to apply &lt;code class=&quot;highlighter-rouge&quot;&gt;wp_make_link_relative&lt;/code&gt; function to links (posts, categories, pages and etc.) to convert them to relative URLs. Useful for developers when debugging local WordPress instance on a mobile device (iPad. iPhone, etc.).&lt;/p&gt;
+
+&lt;p&gt;This plugin should be used for local development only. I haven’t tested on a production environment; it &lt;strong&gt;may&lt;/strong&gt; work with some issues, like unwanted URLs in RSS feed or sharing URLs are replaced with relative URLs, etc.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Example:&lt;/span&gt;
+http://localhost:8080/wp/
+
+&lt;span class=&quot;c&quot;&gt;# Will be converted to:&lt;/span&gt;
+/wp/
+
+&lt;span class=&quot;c&quot;&gt;# And...&lt;/span&gt;
+http://localhost:8080/wp/2012/09/01/hello-world/
+
+&lt;span class=&quot;c&quot;&gt;# Will be converted to:&lt;/span&gt;
+/wp/2012/09/01/hello-world/
+
+&lt;span class=&quot;c&quot;&gt;# And...&lt;/span&gt;
+http://localhost:8080/wp/wp-content/themes/twentyeleven/style.css
+
+&lt;span class=&quot;c&quot;&gt;# Will be converted to:&lt;/span&gt;
+/wp/wp-content/themes/twentyeleven/style.css
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then after activating this plugin, you can simply access your local instance using &lt;code class=&quot;highlighter-rouge&quot;&gt;http://10.0.1.5:8888/wp/&lt;/code&gt; on your iPad or other mobile devices without having styles and navigation issue.&lt;/p&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;What if I deactivate this plugin?&lt;/summary&gt;
+  &lt;p&gt;The URLs will be changed back to absolute URLs again, there’s no database writes with this plugin.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;Why this plugin is not recommend for production environment?&lt;/summary&gt;
+  &lt;p&gt;URLs in RSS feed are also replaced to relative URLs with this plugin, this could causes some issues for RSS readers that they will be confused for URLs without host. Shared URLs (ie Jetpack Sharing module) are also replaced to related URLs, Twitter, Facebook or other social sites won’t treat them as valid URLs.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;p&gt;If you love this plugin, please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wordpress.org/extend/plugins/relative-url/&quot; class=&quot;download&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/relative-url/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A WordPress plugin to apply wp_make_link_relative function to links to convert them to relative URLs.</summary></entry><entry><title>Tianjin Project × WEF</title><id>https://digitalauthority.com.au//work/tianjin-project-wef/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/tianjin-project-wef/" /><published>2012-07-26T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p class=&quot;note&quot;&gt;There's a &lt;a href=&quot;/work/tianjin-project-revision/&quot;&gt;newer revision&lt;/a&gt; of this project.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/work/tianjin-project/&quot;&gt;Tianjin Project&lt;/a&gt; is now featured on the World Economic Forum (WEF) - Tianjin Davos 2012. Created using iBooks Author, for iPad only.&lt;/p&gt;
+
+&lt;h2&gt;Book Preview&lt;/h2&gt;
+&lt;p&gt;&lt;img class=&quot;no-enlarge&quot; src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-project-wef-preview-merged.jpg&quot; alt=&quot;Tianjin Project &amp;times; World Economic Forum Book Preview&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A Detailed Introduction to Municipality of Tianjin featured on the World Economic Forum</summary></entry><entry><title>Tianjin Project</title><id>https://digitalauthority.com.au//work/tianjin-project/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/tianjin-project/" /><published>2012-06-11T00:00:00+08:00</published><updated>2018-08-27T21:59:05+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p class=&quot;note&quot;&gt;There's a &lt;a href=&quot;/work/tianjin-project-revision/&quot;&gt;newer revision&lt;/a&gt; of this project.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Now this project is featured on &lt;a href=&quot;/work/tianjin-project-wef/&quot;&gt;The World Economic Forum - Tianjin Davos 2012&lt;/a&gt;. You can also check out the &lt;a href=&quot;/lab/tianjin/&quot;&gt;project page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d1bmx7s6749k4k.cloudfront.net/Tianjin.ibooks&quot;&gt;Download&lt;/a&gt; it for iPad. (No iPad? Here’s a &lt;a href=&quot;https://d1bmx7s6749k4k.cloudfront.net/Tianjin.pdf&quot;&gt;PDF version&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2&gt;Book Preview&lt;/h2&gt;
+
+&lt;p&gt;&lt;img class=&quot;no-enlarge&quot; src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-project-preview-merged.jpg&quot; alt=&quot;Tianjin Project Book Preview #6&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;no-enlarge&quot; src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-project-preview-01.jpg&quot; alt=&quot;Tianjin Project Book Preview #1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;no-enlarge&quot; src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-project-preview-02.jpg&quot; alt=&quot;Tianjin Project Book Preview #2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;no-enlarge&quot; src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-project-preview-03.jpg&quot; alt=&quot;Tianjin Project Book Preview #3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;no-enlarge&quot; src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-project-preview-04.jpg&quot; alt=&quot;Tianjin Project Book Preview #4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;no-enlarge&quot; src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-project-preview-05.jpg&quot; alt=&quot;Tianjin Project Book Preview #5&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Promo Video&lt;/h2&gt;
+
+&lt;p&gt;You can view the promotion video on &lt;a href=&quot;https://youtu.be/dk2Fg8WJ3-o&quot;&gt;YouTube&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;/lab/tianjin/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A Detailed Introduction to Municipality of Tianjin</summary></entry><entry><title>Path Menu in CSS</title><id>https://digitalauthority.com.au//work/path-menu-in-css/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/path-menu-in-css/" /><published>2011-12-07T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;In case you missed it: I recently created a &lt;a href=&quot;https://web.archive.org/web/20170202080543/https://path.com/&quot;&gt;Path&lt;/a&gt; menu using CSS. You can view the demo &lt;a href=&quot;/lab/path-menu/&quot;&gt;on my website&lt;/a&gt; or check it out on &lt;a href=&quot;https://dribbble.com/shots/340844&quot;&gt;Dribbble&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;/lab/path-menu/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>In case you missed it: I recently created a Path menu using CSS. You can view the demo on my website or check it out on Dribbble.</summary></entry><entry><title>Crystallized Dream</title><id>https://digitalauthority.com.au//work/crystallized-dream/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/crystallized-dream/" /><published>2011-08-28T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/crystallized-dream.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I really enjoyed painting this one. Thanks to GarageBand and di.fm.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Moonstruck princess in my dream, under the umbrella.</summary></entry><entry><title>Moonstruck Princess</title><id>https://digitalauthority.com.au//work/moonstruck-princess/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/moonstruck-princess/" /><published>2011-07-31T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess.jpg&quot; alt=&quot;Moonstruck Princess&quot; data-background=&quot;rgba(0, 0, 0, .5)&quot; data-padding=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Inspired by my dream.&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/moonstruck-princess-wallpaper.png&quot;&gt;Wallpaper ver.&lt;/a&gt; (2560 x 1440)&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Moonstruck princess in my dream, inspired by you.</summary></entry><entry><title>Project Railgun</title><id>https://digitalauthority.com.au//work/railgun/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/railgun/" /><published>2011-07-19T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/railgun-avatar.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;對我來說這是第一次做這麼大的工程，感覺還是有很大不同的，給自己做的時候只需要在腦子里構思就好了，而現在，除非我是 boss，這些都需要經過一系列的複雜步驟才能實現出來，也許這就是團隊合作吧&lt;/p&gt;
+
+&lt;h2&gt;Railgun Homepage Redesign&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/railgun.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Advanced Search Page&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/railgun-search-large.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Administrator Control Dialog&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/railgun-tag-large.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Error Page Redesign&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/railgun-error-large.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;在高級搜索功能上用了不少功夫，最初還想把 checkbox 和 radio 加上樣式，但遇到了兼容問題還是放棄了&lt;/p&gt;
+&lt;p lang=&quot;zh&quot;&gt;是後台的管理部份。當時發在了 Dribbble 上被 &lt;a href=&quot;https://twitter.com/csee&quot; title=&quot;&quot;&gt;@csee&lt;/a&gt; 提了配色的建議（這裡還要感謝他給我提供了 Dribbble 的 invite），後來雖然也把整體配色做了改進，但殘念的是細節卻沒甚麼變化&lt;/p&gt;
+&lt;p lang=&quot;zh&quot;&gt;另外我還為 Tora 醬做了不少維護頁面（Illustration by 唯）&lt;/p&gt;
+
+&lt;h2&gt;Sub-project JSharer&lt;/h2&gt;
+
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/railgun-jsharer-large.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;JSharer, aka. Project Molten Core, anime based file-hosting sites. No massive images and complex layouts. Just simple CSS + HTML frontend site.&lt;/p&gt;
+
+&lt;h2&gt;Sub-project MoeID Passport&lt;/h2&gt;
+
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/moeid.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;MoeID passport redesign for JSharer Community&lt;br /&gt;「極享」動漫社區通行證頁面&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20171114200039/http://ra.gg/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A Japanese ACG (Animations, Comics and Games) community</summary></entry><entry><title>Start Page</title><id>https://digitalauthority.com.au//work/start-page/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/start-page/" /><published>2011-07-18T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Start Page for your browser. The best browser homepage in the world, probably. Inspired by &lt;a href=&quot;https://web.archive.org/web/20111127185400/http://lifepath.me/&quot;&gt;Lifepath&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;/lab/start/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Start Page for your browser. The best browser homepage in the world, probably.</summary></entry><entry><title>030Buy Hiring Page</title><id>https://digitalauthority.com.au//work/030buy-hiring/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/030buy-hiring/" /><published>2011-07-17T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;h2&gt;Original Character Design Sketch&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/030buy-hiring-sketch-01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Original Character Design Sketch (Filled)&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/030buy-hiring-sketch-02-original.png&quot; data-background=&quot;rgba(45, 102, 84, 0.9)&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Webpage&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/030buy-hiring.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can visit this page &lt;a href=&quot;https://web.archive.org/web/20180615180444/http://re.030buy.com/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>030Buy hiring page for a Japanese ACG (Animations, Comics and Games) community</summary></entry><entry><title>Project 030Buy</title><id>https://digitalauthority.com.au//work/030buy/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/030buy/" /><published>2011-07-10T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;h2&gt;Checkout Page #1&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/030buy-01.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Order list&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/030buy-04.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Checkout Page #1&lt;/h2&gt;
+&lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/030buy-02.png&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://www.030buy.net/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>030Buy online shopping site for a Japanese ACG (Animations, Comics and Games) community</summary></entry><entry><title>find.ac Alter</title><id>https://digitalauthority.com.au//work/findac-alter/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/findac-alter/" /><published>2011-07-05T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/find.ac-alter.jpg&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>find.ac Alter merchant page for a Japanese ACG (Animations, Comics and Games) community</summary></entry><entry><title>Tianjin Impression Brochure</title><id>https://digitalauthority.com.au//work/tianjin-impression-brochure/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/tianjin-impression-brochure/" /><published>2011-05-08T00:00:00+08:00</published><updated>2016-11-29T15:38:18+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-impression-brochure-01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-impression-brochure-02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-impression-brochure-03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-impression-brochure-04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/tianjin-impression-brochure-05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tianjin Impression brochure for my college work. Thanks to BK HAN, pomphorhynchus, Bad Jim, kilroy238, Takayuki Shiraiwa and I.S.S&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Tianjin Impression brochure for my college work</summary></entry><entry><title>fogbound-highrise</title><id>https://digitalauthority.com.au//work/fogbound-highrise/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/fogbound-highrise/" /><published>2011-03-07T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p class=&quot;browser&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/fogbound-highrise-screenshot-large.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Version 15, source code hosted at &lt;a href=&quot;https://github.com/sparanoid/sparanoid.com&quot;&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>The 15th version of sparanoid.com, featuring Jekyll</summary></entry><entry><title>Readability Buttons</title><id>https://digitalauthority.com.au//work/readability/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/readability/" /><published>2011-02-20T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;strong&gt;Readability Buttons&lt;/strong&gt; is a WordPress plugin to add readability.com widget on your site. A must-have plugin if you’re a Readability &lt;del&gt;publisher&lt;/del&gt; user &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. This plugin also works fine with multisite enabled WordPress (aka. WordPress Mu). If you love this plugin, please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://wordpress.org/extend/plugins/readability-buttons/&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://web.archive.org/web/20160425094356/https://blog.readability.com/2012/06/announcement/&quot;&gt;An Important Announcement&lt;/a&gt; by Richard Ziade at Readability &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/readability-buttons/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A WordPress plugin to add readability.com widget on your site. A must-have plugin if you’re a Readability publisher. This plugin also works fine with multisite enabled WordPress (aka. WordPress Mu).</summary></entry><entry><title>Nessa</title><id>https://digitalauthority.com.au//work/nessa/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/nessa/" /><published>2011-01-31T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;フラクタル - ネッサ&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/nessa.jpg&quot; alt=&quot;Moonstruck Princess&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>フラクタル - ネッサ</summary></entry><entry><title>SlimBox &amp; VoxGrowl</title><id>https://digitalauthority.com.au//work/slimbox-and-voxgrowl/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/slimbox-and-voxgrowl/" /><published>2010-12-05T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;a href=&quot;https://youtu.be/nSQL7Al-v2U&quot;&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/slimbox-voxgrowl.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yes, These two &lt;a href=&quot;http://growl.info/&quot;&gt;Growl&lt;/a&gt; styles are now updated, I’m fed up with the white one so I change the SlimBox to a dark one in this version. VoxGrowl is used for &lt;a href=&quot;https://vox.rocks/mac-music-player&quot;&gt;Vox&lt;/a&gt; music player for OS X, but it also can be used by any other music player that displays album art. You can have a quick preview here:&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/SlimBox-1.2.dmg&quot;&gt;SlimBox-1.2.dmg&lt;/a&gt; (70 KB)&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/VoxGrowl-1.2.dmg&quot;&gt;VoxGrowl-1.2.dmg&lt;/a&gt; (370 KB)&lt;/p&gt;
+
+&lt;p class=&quot;store&quot;&gt;Love these styles? please consider &lt;a href=&quot;/donate/&quot;&gt;making a donation&lt;/a&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>The missing Growl styles for OS X</summary></entry><entry><title>Lucky Star for QQ / Sogou Pinyin</title><id>https://digitalauthority.com.au//work/lucky-star-ime-theme/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/lucky-star-ime-theme/" /><published>2010-09-15T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/lucky-star-for-sogou_large.png&quot; alt=&quot;Lucky Star Theme for QQ/Sogou Pinyin IME&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Lucky Star skin for QQ Pinyin IME (QQ 拼音輸入法) &lt;i&gt;&amp;amp;&lt;/i&gt; Sougou Pinyin IME (搜狗拼音輸入法), based on Japanese anime Lucky☆Star「らき☆すた」&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;http://shuru.qq.com/skin_detail?skin_id=4293199403&quot;&gt;lucky-star.qpys&lt;/a&gt; (? KB) / &lt;a href=&quot;https://pinyin.sogou.com/skins/detail/view/info/307818&quot;&gt;lucky-star.ssf&lt;/a&gt; (? KB)&lt;/p&gt;
+
+&lt;p class=&quot;store&quot;&gt;Love this skin? please consider &lt;a href=&quot;/donate/&quot;&gt;making a donation&lt;/a&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>DOLLARS Chat Room</title><id>https://digitalauthority.com.au//work/drrr/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/drrr/" /><published>2010-05-03T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;A chat room web app inspired by Japanese anime 「デュラララ!!」. DOLLARS Chat Room was registered on April 28, 2010. It was closed at the end of the year and reloaded on July 25, 2011. Source code based on &lt;a href=&quot;https://code.google.com/p/drrr-like-chat/&quot;&gt;drrr-like-chat&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://drrr.com/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A chat room web app inspired by Japanese anime 「デュラララ!!」. DOLLARS Chat Room was registered on April 28, 2010. It was closed at the end of the year and reloaded on July 25, 2011. Source code based on drrr-like-chat.</summary></entry><entry><title>Antiskill, Judgment Icon Set and Screensaver</title><id>https://digitalauthority.com.au//work/judgment-screensaver-icon/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/judgment-screensaver-icon/" /><published>2010-03-07T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Antiskill &lt;i&gt;&amp;amp;&lt;/i&gt; Judgment Section 177 screensaver and icons, auto-scale screensaver tested up to 2560 &amp;times; 1600.&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;學園都市風紀委員 177 支部＆警備員 スクリーンセーバー＆アイコン from「とある科學の超電磁砲」&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/judgment-screensaver-icon-from-academy-city-02.png&quot; alt=&quot;Judgment Screensaver from Academy City Screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/judgment-screensaver-icon-from-academy-city-00.png&quot; alt=&quot;Judgment Icon from Academy City&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/antiskill-screensaver-from-academy-city-02.jpg&quot; alt=&quot;Original Antiskill Screensaver from Academy City&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;來自學園都市風紀委員 177 支部的屏保，網上之前貌似有人做過，但效果不理想，重新做一下，自適應寬高比，最大測試過 2560 &amp;times; 1600 的顯示器。另外做安裝包的同時順帶做了個圖標，&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/judgment-screensaver-icon-from-academy-city-01.png&quot;&gt;內含七種顔色&lt;/a&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;來自學園都市警備員的屏幕保護，在第 24 話中出現過，自適應寬高比，最大測試過 2560 &amp;times; 1600 的顯示器。由于警備員的圖標並不十分美觀，所以安裝包就沿用了風紀委員的&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/judgment_icon.7z&quot;&gt;Download&lt;/a&gt; / judgment_icon.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/judgment_library.7z&quot;&gt;Download&lt;/a&gt; / judgment_library.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/judgment_screensaver.7z&quot;&gt;Download&lt;/a&gt; / judgment_screensaver.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/judgment_screensaver_chs.exe&quot;&gt;Download&lt;/a&gt; / judgment_screensaver_chs.exe&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/judgment_screensaver_en.exe&quot;&gt;Download&lt;/a&gt; / judgment_screensaver_en.exe&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/antiskill_screensaver.7z&quot;&gt;Download&lt;/a&gt; / antiskill_screensaver.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/antiskill_screensaver_chs.exe&quot;&gt;Download&lt;/a&gt; / antiskill_screensaver_chs.exe&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/antiskill_screensaver_en.exe&quot;&gt;Download&lt;/a&gt; / antiskill_screensaver_en.exe&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Based on Toaru Kagaku no Railgun「とある科学の超電磁砲」</summary></entry><entry><title>imouto.tk - Online Painting</title><id>https://digitalauthority.com.au//work/imouto.tk/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/imouto.tk/" /><published>2010-02-10T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;An online painting website side-project. .tk domain is free to register. I’ll move it to my main domain if I have more spare time.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Unfortunately, the project has been discountinued, however you can grab the &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/screenshot/imouto.tk%20-%202010-04-17%20-%2001-21-15.png&quot;&gt;last seen screenshot&lt;/a&gt;.&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>imouto.tk - Online Painting site.</summary></entry><entry><title>foobar2000 - MonoLite Plus</title><id>https://digitalauthority.com.au//work/monolite-plus/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/monolite-plus/" /><published>2009-11-23T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-04.jpg&quot; alt=&quot;MonoLite Plus&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Lastest Version: &lt;strong&gt;0.4.3&lt;/strong&gt; for foobar2000 1.0 / &lt;strong&gt;0.2&lt;/strong&gt; for foobar2000 0.9.6.9&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;0.4.* 版本的 Last.fm 同步功能可能會在退出 foobar2000 時隨機出現錯誤提示，但不會影響正常使用&lt;/p&gt;
+
+&lt;h2&gt;什麽是 MonoLite Plus？&lt;/h2&gt;
+
+&lt;p&gt;MonoLite Plus 是一款基于 &lt;a href=&quot;https://yuo.be/columns_ui&quot;&gt;Columns UI&lt;/a&gt; 組件創建的 &lt;a href=&quot;https://www.foobar2000.org/&quot;&gt;foobar2000&lt;/a&gt; 皮膚&lt;/p&gt;
+
+&lt;h2&gt;與原版 MonoLite 有什麽不同？&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;增加歌詞顯示功能，支持自動下載歌詞&lt;/li&gt;
+  &lt;li&gt;增加藝術家簡介功能，信息來自 Last.fm&lt;/li&gt;
+  &lt;li&gt;集成 Last.fm 同步功能，支持點擊圖標增加 Love 曲目&lt;/li&gt;
+  &lt;li&gt;增加多種列表顯示模式（普通、&lt;del datetime=&quot;2010-01-11T12:48:16+00:00&quot;&gt;緊湊&lt;/del&gt;、大圖標、小圖標等）&lt;/li&gt;
+  &lt;li&gt;專輯標題樣式美化，增加陰影效果，修改字體&lt;/li&gt;
+  &lt;li&gt;多處界面細節調整&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+&lt;strong&gt;MonoLite Plus 0.4.* 界面截圖：&lt;/strong&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-04-01.png&quot;&gt;#1&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-04-02.png&quot;&gt;#2&lt;/a&gt;
+&lt;br /&gt;
+&lt;strong&gt;MonoLite Plus 0.2 / 0.3.* 界面截圖：&lt;/strong&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02-01.png&quot;&gt;#1&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02-02.png&quot;&gt;#2&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02-03.png&quot;&gt;#3&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02-04.png&quot;&gt;#4&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02-05.png&quot;&gt;#5&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02-06.png&quot;&gt;#6&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02-07.png&quot;&gt;#7&lt;/a&gt;
+&lt;br /&gt;
+&lt;strong&gt;MonoLite Plus 0.1 界面截圖：&lt;/strong&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-01.png&quot;&gt;#1&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-02.png&quot;&gt;#2&lt;/a&gt;
+  &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-03.png&quot;&gt;#3&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;h2&gt;MonoLite Plus 安裝向導 (Portable 模式)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;複制壓縮包中所有文件到 fooobar2000 文件夾&lt;/li&gt;
+  &lt;li&gt;運行 foobar2000 並選擇 Columns UI&lt;/li&gt;
+  &lt;li&gt;依次打開 Preferences &amp;#8250; Display &amp;#8250; Columns UI，然後導入皮膚 &lt;code&gt;file mono_lite.fcl&lt;/code&gt; &lt;em&gt;（foobar2000 1.0 無需此設置）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;大功告成&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;MonoLite Plus 安裝向導 (標准模式)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;將配置文件位置修改爲應用程序安裝目錄，位于選項中的 General 處修改&lt;/li&gt;
+  &lt;li&gt;這樣會重制你的設置，因此修改爲 portable 後請手動轉移原配置到新目錄&lt;/li&gt;
+  &lt;li&gt;然後照做 Portable 模式下的安裝方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Last.fm 功能安裝向導&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;首先執行 monolite_lastfm_install.bat 文件，相關組件會自動安裝&lt;/li&gt;
+  &lt;li&gt;在心形圖標的右鍵菜單處輸入用戶名與 API 密鑰&lt;/li&gt;
+  &lt;li&gt;如沒有 API 密鑰則需要從 &lt;a href=&quot;https://www.last.fm/api/account&quot;&gt;這裏&lt;/a&gt; 申請&lt;/li&gt;
+  &lt;li&gt;運行 foobar2000 並在設置窗口中的 Tools / Audioscrobbler 與 Tools / Soft Playlists 面板中輸入您的帳戶信息&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Last.fm 功能移除向導&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;退出 foobar2000，然後運行 monolite_remove_lastfm.bat，所有的相關文件會被移動到 monolite_backup 文件夾&lt;/li&gt;
+  &lt;li&gt;如果哪天突然想用 Last.fm 了，則運行 monolite_restore_lastfm.bat 然後菜單中選回 Monolite Plus with Last.fm 所有的相關文件及配置即可還原&lt;/li&gt;
+  &lt;li&gt;選中菜單中的 View / Layout / MonoLite Plus (Without Last.fm Icon) 可以去掉其圖標&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;會自動生成的內容&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;%foobar_dir%\lyrics\*&lt;/code&gt; - 歌詞存放目錄 (foo_uie_lyrics.dl)&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;%foobar_dir%\lastfm\*&lt;/code&gt; - 藝術家、專輯圖片 (foo_uie_biography.dll)&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;%foobar_dir%\customdb_sqlite.db&lt;/code&gt; - Last.fm 數據庫 (foo_customdb.dll)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果不想自動生成這些文件，可在設置中禁用&lt;/p&gt;
+
+&lt;h2&gt;使用技巧&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;左鍵雙擊專輯分類=全選該分類下的曲目；中鍵單擊曲目=打開曲目屬性窗口&lt;/li&gt;
+  &lt;li&gt;音樂庫中中鍵點擊某項=將該項目添加到新播放列表並播放&lt;/li&gt;
+  &lt;li&gt;通過右鍵菜單 Tagging / Quick Tagger / Set &amp;lt;rating&amp;gt; to... 可以爲曲目評星，也可在設置界面中爲此功能綁定快捷鍵，例如 ALT 1-5，ALT + 6 取消評星&lt;/li&gt;
+  &lt;li&gt;隱藏菜單欄、狀態欄會有更好的視覺效果。菜單欄可以在需要的時候點擊右上角的按鈕顯示&lt;/li&gt;
+  &lt;li&gt;在播放列表任意位置點擊右鍵，即可修改 Sort 與 Group by 類型&lt;/li&gt;
+  &lt;li&gt;當修改了 Group by 類型後，專輯封面大小會發生變化，導致專輯封面顯示模糊，此時右鍵點擊列表任意位置選 Refresh all 即可&lt;/li&gt;
+  &lt;li&gt;建議 &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/monolite-plus-04.png&quot;&gt;如圖修改&lt;/a&gt; 快捷鍵設置，從此敲擊空格即可定位到正在播放的曲目&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Windows XP 用戶&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需要安裝 Segoe UI 才能顯示正確字體，字體請從 &lt;del datetime=&quot;2010-10-17T08:34:52+00:00&quot;&gt;下方下載區下載&lt;/del&gt; 網上自行搜索&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;聲明&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MonoLite 原作者爲 fanco86 &lt;a href=&quot;https://fanco86.deviantart.com/art/MonoLite-122756120&quot;&gt;#&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;MonoLite Plus 由 Sparanoid 修改 &lt;a href=&quot;https://junior-spirit.deviantart.com/art/MonoLite-Plus-144505359/&quot;&gt;#&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;MonoLite Plus 爲 MonoLite 的修改版&lt;/li&gt;
+  &lt;li&gt;Last.fm WSH Panel 代碼由 marc2003 編寫 &lt;a href=&quot;https://hydrogenaud.io/index.php/topic,76772.0.html&quot;&gt;#&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;光盤圖標由 PaulEnsane 制作 &lt;a href=&quot;https://paulensane.deviantart.com/art/CD-Icon-115783933&quot;&gt;#&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;心形圖標由 Tango Desktop Project 制作 &lt;a href=&quot;https://web.archive.org/web/20190323120211/http://tango.freedesktop.org/Tango_Desktop_Project&quot;&gt;#&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;感歎號圖標由 Yusuke Kamiyamane 制作 &lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;#&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;媒體庫查看方式代碼基于 hydrogenaudio.org 論壇的 2E7AH 修改 &lt;a href=&quot;https://hydrogenaud.io/index.php/topic,68552.msg684400.html#msg684400&quot;&gt;#&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;note&quot;&gt;該主題基于 &lt;a href=&quot;https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh&quot;&gt;署名-非商業性使用-相同方式共享 3.0 發布&lt;/a&gt;&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-043.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-042.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-041.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-04.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-031.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-03.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-02.7z&lt;/p&gt;
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/monolite-plus-043.7z&quot;&gt;Download&lt;/a&gt; / monolite-plus-01.7z&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A foobar2000 theme based on Columns UI</summary></entry><entry><title>7-Zip Iconset Redesign v2</title><id>https://digitalauthority.com.au//work/7z-icon/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/7z-icon/" /><published>2008-11-24T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/7z-icon-2_logo_large.png&quot; alt=&quot;7-Zip 美化圖標組&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The 2&lt;sup&gt;nd&lt;/sup&gt; icon set for 7-Zip, works fine on Windows 7. The font used in icons is created by &lt;a href=&quot;http:s//www.myfonts.com/fonts/larabie/saved-by-zero/&quot;&gt;Saved by Zero&lt;/a&gt;. The original &lt;a href=&quot;https://thvg.deviantart.com/art/Package-Icons-93530123&quot;&gt;box template&lt;/a&gt; is created by &lt;a href=&quot;https://thvg.deviantart.com/&quot;&gt;Thvg&lt;/a&gt; on deviantART&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/7z-icon-2_details_large.png&quot;&gt;Icons preview&lt;/a&gt; / &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/7z-icon-set-v2.7z&quot;&gt;Download&lt;/a&gt; (for 4.6.1 beta x86)&lt;/p&gt;
+
+&lt;h2&gt;Notice&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Make sure you’ve installed 7-Zip before installing this icon set.&lt;/li&gt;
+&lt;li&gt;This installer will backup your original icons with uninstaller. Uninstall this icon set can restore you 7-Zip icons.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;note&quot;&gt;This project is discontinued, but you can try &lt;a href=&quot;http://www.7ztm.de/&quot;&gt;this tool&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chinese Description&lt;/h2&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;此爲第二版美化圖標組，新版本圖標可以在 Windows 7 下完美顯示。圖標中使用的字體爲 &lt;a href=&quot;https://www.myfonts.com/fonts/larabie/saved-by-zero/&quot;&gt;Saved by Zero&lt;/a&gt;。紙箱子 &lt;a href=&quot;https://thvg.deviantart.com/art/Package-Icons-93530123&quot;&gt;素材&lt;/a&gt; 由來自 deviantART 的 &lt;a href=&quot;https://thvg.deviantart.com/&quot;&gt;Thvg&lt;/a&gt; 授權提供&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/7z-icon-2_details_large.png&quot;&gt;圖標詳細樣式預覽&lt;/a&gt; / &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/7z-icon-set-v2.7z&quot;&gt;下載&lt;/a&gt; (for 4.6.1 beta x86)&lt;/p&gt;
+
+&lt;h2&gt;注意事項&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;安裝本圖標組之前請確定您已經正確安裝了 7-Zip 原程序&lt;/li&gt;
+&lt;li&gt;安裝前會對原作者的圖標文件進行備份，附刪除程序。刪除後可恢複原圖標&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;note&quot;&gt;尋找 7-Zip 可用的圖標組？可以試試 &lt;a href=&quot;http://www.7ztm.de/&quot;&gt;這個工具&lt;/a&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A redesigned iconset for 7-Zip File Manager</summary></entry><entry><title>Font Zomnk</title><id>https://digitalauthority.com.au//work/zomnk/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/zomnk/" /><published>2008-07-26T00:00:00+08:00</published><updated>2018-09-23T17:52:56+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/font-zomnk.png&quot; alt=&quot;Font 'Zomnk'&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;第一次做字體，或者說是改，或者叫 Redesign，或者叫 Repack，叫什麽都好，反正做的難免有些粗糙。用的是 FontLab Studio 5 做的，這是一款大小寫格式相同的英文字體。字體部分借鑒了某品牌的幼線體，因此……請低調宣傳。做這款字體的初衷是應用于 v13 主題 的 Flash 字體顯示，本來還想做 OpenType，後來嫌麻煩，又不用于印刷，直接做了 TT 格式的。優化了標點符號的顯示，可以在這裏看 &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/font-zomnk-screenshot-02.png&quot;&gt;修改前&lt;/a&gt; 和 &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/font-zomnk-screenshot-03.png&quot;&gt;修改後&lt;/a&gt; 的效果&lt;/p&gt;
+
+&lt;h2&gt;English Description&lt;/h2&gt;
+
+&lt;p&gt;This is the first time I make my own font, or let me say it, “remix”. Created by FontLab Studio 5. Only uppercased characters included mainly used for my v13 theme in Flash. Only TrueType provided at the moment. You can compare the differences &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/font-zomnk-screenshot-02.png&quot;&gt;before&lt;/a&gt; and &lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/font-zomnk-screenshot-03.png&quot;&gt;after&lt;/a&gt; modifying&lt;/p&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://d349cztnlupsuf.cloudfront.net/download/font-zomnk.7z&quot;&gt;Download&lt;/a&gt; / font-zomnk.7z&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A true-type font used for my old WordPress theme</summary></entry><entry><title>UPC Dope Show</title><id>https://digitalauthority.com.au//work/upc-dope-show/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/upc-dope-show/" /><published>2008-07-19T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/upc-dope-show.jpg&quot; alt=&quot;UPC Dope Show&quot; data-background=&quot;rgba(0, 0, 0, .9)&quot; data-padding=&quot;0&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>We’re all stars now, in the dope show</summary></entry><entry><title>RX Hidden FKER a JPER</title><id>https://digitalauthority.com.au//work/rx-hidden-fker-a-jper/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/rx-hidden-fker-a-jper/" /><published>2007-10-20T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/rx-hidden-fker-a-jper.jpg&quot; alt=&quot;RX Hidden FKER A JPER&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Finished in my high school</summary></entry><entry><title>RX R.T.S_01-04</title><id>https://digitalauthority.com.au//work/rx-rts/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/rx-rts/" /><published>2007-10-06T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/rx-rts_01.jpg&quot; alt=&quot;RX R.T.S_01&quot; data-background=&quot;rgba(0, 0, 0, .9)&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;明天還有期中考試，我卻在這裏亂塗亂畫，這的確是罪該萬死了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/rx-rts_02.jpg&quot; alt=&quot;RX R.T.S_02&quot; data-background=&quot;rgba(0, 0, 0, .9)&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;最近經常 R.T.S，這的確很難受，窗外的這番景象看了 16 年，我想還是用我的方式給記錄下來吧&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/rx-rts_03.jpg&quot; alt=&quot;RX R.T.S_03&quot; data-background=&quot;rgba(0, 0, 0, .9)&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;還是用鼠標畫的，數位板可望不可及&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/rx-rts_04.jpg&quot; alt=&quot;RX R.T.S_03&quot; data-background=&quot;rgba(0, 0, 0, .9)&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;這個時間比較長，7 hr（小時），分了兩天畫的&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>No description</summary></entry><entry><title>6:53 pm / 0:25 am (inv)</title><id>https://digitalauthority.com.au//work/1853-0025-0025-inv/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/1853-0025-0025-inv/" /><published>2007-07-06T00:00:00+08:00</published><updated>2018-09-23T17:40:42+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;h2&gt;6:53 PM&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/0653-pm.jpg&quot; alt=&quot;6:53 PM&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;00:25 AM&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/0025-am.jpg&quot; alt=&quot;00:25 AM&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;00:25 AM [INV]&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/0025-am-inv.jpg&quot; alt=&quot;00:25 AM [INV]&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Finished in my high school</summary></entry><entry><title>Countryroad</title><id>https://digitalauthority.com.au//work/countryroad/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/countryroad/" /><published>2007-04-29T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/countryroad.jpg&quot; alt=&quot;Countryroad&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Cuntryroad</summary></entry><entry><title>Gouache - Trees</title><id>https://digitalauthority.com.au//work/gouache-trees/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/gouache-trees/" /><published>2007-04-22T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/gouache-trees.jpg&quot; alt=&quot;Gouache - Trees&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Gouache - Trees</summary></entry><entry><title>Copland</title><id>https://digitalauthority.com.au//work/cropland/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/cropland/" /><published>2007-04-21T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/cropland.jpg&quot; alt=&quot;Cropland&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Cropland</summary></entry><entry><title>Outgrow</title><id>https://digitalauthority.com.au//work/outgrow/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/outgrow/" /><published>2007-04-17T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/outgrow.jpg&quot; alt=&quot;Outgrow&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Outgrow</summary></entry><entry><title>Backlighting</title><id>https://digitalauthority.com.au//work/backlighting/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/backlighting/" /><published>2007-04-15T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/backlighting.jpg&quot; alt=&quot;Backlighting&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Backlighting</summary></entry><entry><title>You Are The Murderer</title><id>https://digitalauthority.com.au//work/you-are-the-murderer/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/you-are-the-murderer/" /><published>2006-11-05T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Can I help you?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/you_are_the_murderer.jpg&quot; alt=&quot;You Are The Murderer&quot; data-lightense-background=&quot;#ff5700&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Can I help you?</summary></entry><entry><title>Still Like A Murderer</title><id>https://digitalauthority.com.au//work/still-like-a-murderer/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/still-like-a-murderer/" /><published>2006-11-05T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Can I help you?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/still_like_a_murderer.jpg&quot; alt=&quot;Still Like A Murderer&quot; data-lightense-background=&quot;#000&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Can I help you?</summary></entry><entry><title>Walking Like A Murderer</title><id>https://digitalauthority.com.au//work/walking-like-a-murderer/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/walking-like-a-murderer/" /><published>2006-11-01T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Can I help you?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/walking_like_a_murderer.jpg&quot; alt=&quot;Walking Like A Murderer&quot; data-lightense-background=&quot;#920000&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Can I help you?</summary></entry><entry><title>Withered</title><id>https://digitalauthority.com.au//work/withered/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/withered/" /><published>2006-10-28T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/withered.jpg&quot; alt=&quot;Withered&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Withered</summary></entry><entry><title>Mobscene</title><id>https://digitalauthority.com.au//work/mobscene/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/mobscene/" /><published>2006-10-11T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Mobscene on a bus. Full of mocking students.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/mobscene.jpg&quot; alt=&quot;Mobscene&quot; data-lightense-background=&quot;#000&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Mobscene on a bus. Full of mocking students.</summary></entry><entry><title>Old High School</title><id>https://digitalauthority.com.au//work/old-high-school/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/old-high-school/" /><published>2006-09-18T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/old_high_school.jpg&quot; alt=&quot;Old High School&quot; /&gt;&lt;/p&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;My old high school, before we moved to a new one. 學校搬家前的校舍，正在上最後一課&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>My old high school, before we moved to a new one.</summary></entry><entry><title>Dry Heat</title><id>https://digitalauthority.com.au//work/dry-heat/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/dry-heat/" /><published>2006-08-25T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;It was an indescribable hot day that I created this fantasic image.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/dry_heat.jpg&quot; alt=&quot;Dry Heat&quot; data-lightense-background=&quot;#000&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>It was an indescribable hot day that I created this fantasic image.</summary></entry><entry><title>Patch GUI for Feisu</title><id>https://digitalauthority.com.au//work/patch-gui-for-feisu/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/patch-gui-for-feisu/" /><published>2006-08-10T00:00:00+08:00</published><updated>2018-11-09T12:40:04+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Patch GUI for Feisu. by Photoshop and Painter, Feisu is also a student just a little older than me.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/patch_gui_for_feisu.png&quot; class=&quot;no-resize&quot; alt=&quot;Patch GUI for Feisu&quot; data-lightense-background=&quot;#510e00&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Patch GUI for Feisu. by Photoshop and Painter, Feisu is also a student just a little older than me.</summary></entry><entry><title>Admoniz</title><id>https://digitalauthority.com.au//work/admoniz/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/admoniz/" /><published>2006-08-03T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Admoniz - Project Preview, It’s just a preview, I won’t really work it out.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/admoniz.jpg&quot; alt=&quot;Admoniz&quot; data-lightense-background=&quot;#25252e&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/admoniz_highlight.jpg&quot; alt=&quot;Admoniz Highlight&quot; data-lightense-background=&quot;#25252e&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/admoniz_gif.gif&quot; alt=&quot;Admoniz GIF&quot; data-lightense-background=&quot;#25252e&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Admoniz - Project Preview, It’s just a preview, I won’t really work it out.</summary></entry><entry><title>Ka-boom</title><id>https://digitalauthority.com.au//work/ka-boom/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/ka-boom/" /><published>2006-07-31T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Can I help you?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/ka_boom.jpg&quot; alt=&quot;Ka-boom&quot; data-lightense-background=&quot;#050505&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Can I help you?</summary></entry><entry><title>Yuika-R1 w600</title><id>https://digitalauthority.com.au//work/yuika-r1-w600/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/yuika-r1-w600/" /><published>2006-06-17T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/yuika-r1_w600_sketch.jpg&quot; alt=&quot;Yuika-R1 w600&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>Display at Night</title><id>https://digitalauthority.com.au//work/display-at-night/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/display-at-night/" /><published>2006-06-17T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;I looked at my display at night, may be midnight.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/display_at_night.jpg&quot; alt=&quot;Display at Night&quot; data-lightense-background=&quot;#050505&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>I looked at my display at night, may be midnight.</summary></entry><entry><title>Melancholy</title><id>https://digitalauthority.com.au//work/melancholy/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/melancholy/" /><published>2006-06-09T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Melancholy, homeless&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/melancholy.jpg&quot; alt=&quot;Melancholy&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Melancholy, homeless</summary></entry><entry><title>Codename eek</title><id>https://digitalauthority.com.au//work/eek/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/eek/" /><published>2006-05-27T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Sunflower, staring at the sun.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/eek.jpg&quot; alt=&quot;Codename eek&quot; data-lightense-background=&quot;#990100&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Sunflower, staring at the sun.</summary></entry><entry><title>Codename eek_sig_sand</title><id>https://digitalauthority.com.au//work/eek-sig-sand/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/eek-sig-sand/" /><published>2006-05-27T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/eek_sig_sand.jpg&quot; alt=&quot;Codename eek_sig_sand&quot; data-lightense-background=&quot;#f0f1eb&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>Xinjustice (Logo)</title><id>https://digitalauthority.com.au//work/theme-xinjustice-logo/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/theme-xinjustice-logo/" /><published>2006-05-13T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Anti- it! No more lies.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/xinjustice_logo.jpg&quot; alt=&quot;Xinjustice (Logo)&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Anti- it! No more lies.</summary></entry><entry><title>Another Alley [Mod]</title><id>https://digitalauthority.com.au//work/another-alley-mod/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/another-alley-mod/" /><published>2006-04-15T00:00:00+08:00</published><updated>2018-09-23T17:40:42+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/another-alley-mod.jpg&quot; alt=&quot;Another Alley [Mod]&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Another Alley [Mod]</summary></entry><entry><title>Tree 04060651</title><id>https://digitalauthority.com.au//work/tree-04060651/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/tree-04060651/" /><published>2006-04-06T00:00:00+08:00</published><updated>2017-01-07T09:39:34+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/tree-04060651.jpg&quot; alt=&quot;Tree 04060651&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Tree 04060651</summary></entry><entry><title>Impossi</title><id>https://digitalauthority.com.au//work/impossi/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/impossi/" /><published>2006-04-02T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Hardship is hard to say out.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/impossi.jpg&quot; alt=&quot;Impossi&quot; data-lightense-background=&quot;#050505&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Hardship is hard to say out.</summary></entry><entry><title>Quotmarks Replacer</title><id>https://digitalauthority.com.au//work/quotmarks-replacer/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/quotmarks-replacer/" /><published>2006-01-29T00:00:00+08:00</published><updated>2019-06-15T13:09:07+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;strong&gt;Quotmarks Replacer&lt;/strong&gt; is a WordPress plugin to disable &lt;code&gt;wptexturize&lt;/code&gt; function that keeps all quotation marks and suspension points in half-width form.&lt;/p&gt;
+
+&lt;blockquote cite=&quot;https://www.apple.com/stevejobs/&quot;&gt;
+  &lt;p&gt;It’s absolutely amazing. One of my all-time favorites.&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;cite&gt;Steve Jobs&lt;/cite&gt;
+  &lt;/footer&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote cite=&quot;https://wordpress.org/&quot;&gt;
+  &lt;p&gt;Shut up, Matt.&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;cite&gt;WordPress&lt;/cite&gt;
+  &lt;/footer&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;Chinese Description&lt;/h2&gt;
+
+&lt;p lang=&quot;zh&quot;&gt;&lt;strong&gt;Quotmarks Replacer&lt;/strong&gt; 通過禁用 &lt;code&gt;wptexturize&lt;/code&gt; 函數，解決 WordPress 自動將半形的單引號、雙引號和省略號轉換爲全形標點的問題。使後台輸入的標點格式與前台讀者瀏覽的標點格式保持一致。並且對 multisite 多站點（WordPress Mu）有良好的支持&lt;/p&gt;
+
+&lt;blockquote cite=&quot;https://web.archive.org/web/20131222183549/http://www.hecaitou.com/blogs/hecaitou/&quot;&gt;
+  &lt;p lang=&quot;zh&quot;&gt;我──一個網絡民工──當然有人會覺得這是謙虛，終於擁有了強悍的標點符號插件──也可能是世界上最棒的！我可以這樣雙引號“”，也可以這樣&quot;&quot;，還可以這樣&quot;──無論是哪一樣，都是最自由的表達！&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;cite&gt;&lt;a href=&quot;https://web.archive.org/web/20131223105544/http://www.hecaitou.com/blogs/hecaitou/archives/119925.aspx&quot;&gt;和菜頭&lt;/a&gt;&lt;/cite&gt;
+  &lt;/footer&gt;
+&lt;/blockquote&gt;
+
+&lt;p class=&quot;download&quot;&gt;&lt;a href=&quot;https://wordpress.org/extend/plugins/quotmarks-replacer/&quot;&gt;Download&lt;/a&gt; it at WordPress.org&lt;/p&gt;
+
+&lt;p class=&quot;store&quot;&gt;Love this plugin? please consider &lt;a href=&quot;/donate/&quot;&gt;buying me a cup of coffee.&lt;/a&gt;&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;https://wordpress.org/plugins/quotmarks-replacer/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>A plugin that disables wptexturize function</summary></entry><entry><title>Handball Matrix (Line)</title><id>https://digitalauthority.com.au//work/handball-matrix-line/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/handball-matrix-line/" /><published>2006-01-18T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;ArtRage is fun.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/handball_matrix_line.jpg&quot; alt=&quot;Handball Matrix (Line)&quot; data-lightense-background=&quot;#050505&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>ArtRage is fun.</summary></entry><entry><title>Handball Matrix (Shadow and Textured Land)</title><id>https://digitalauthority.com.au//work/handball-matrix-shadow-and-textured-land/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/handball-matrix-shadow-and-textured-land/" /><published>2006-01-16T00:00:00+08:00</published><updated>2019-03-31T22:59:52+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;ArtRage is fun.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/handball_matrix_shadow_whiteland.jpg&quot; alt=&quot;Handball Matrix (Shadow and Textured Land)&quot; data-lightense-background=&quot;#050505&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>ArtRage is fun.</summary></entry><entry><title>Anti-</title><id>https://digitalauthority.com.au//work/anti/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/anti/" /><published>2005-09-25T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Anti- it! No more lies.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/anti-.jpg&quot; alt=&quot;Anti-&quot; class=&quot;size-small&quot; data-lightense-background=&quot;#666&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Anti- it! No more lies.</summary></entry><entry><title>Keep Out!</title><id>https://digitalauthority.com.au//work/keep-out/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/keep-out/" /><published>2005-08-23T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;You’re out!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/keep_out.gif&quot; alt=&quot;Keep Out!&quot; data-lightense-background=&quot;#ff0000&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>You’re out!</summary></entry><entry><title>Work in Progress</title><id>https://digitalauthority.com.au//work/work-in-progress/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/work-in-progress/" /><published>2005-08-22T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/work_in_progress.jpg&quot; alt=&quot;Work in Progress&quot; data-lightense-background=&quot;#290000&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>Work in Progress (Original)</title><id>https://digitalauthority.com.au//work/work-in-progress-original/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/work-in-progress-original/" /><published>2005-08-22T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/work_in_progress_original.gif&quot; alt=&quot;Work in Progress (Original)&quot; data-lightense-background=&quot;#ff0000&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>Junior.Spirit's Gallery</title><id>https://digitalauthority.com.au//work/junior-spirit-gallery/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/junior-spirit-gallery/" /><published>2005-08-11T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Junior.Spirit’s theme for ImageVue, a PHP gallery.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/junior.spirit-gallery.jpg&quot; alt=&quot;Junior.Spirit's Gallery&quot; data-lightense-background=&quot;#666&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Junior.Spirit’s theme for ImageVue, a PHP gallery.</summary></entry><entry><title>V6 Wallpaper</title><id>https://digitalauthority.com.au//work/v6-wallpaper/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/v6-wallpaper/" /><published>2005-07-31T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;A wallpaper goodies for V6. Original title: My V6 Wallpaper&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/my_v6_wallpaper.jpg&quot; class=&quot;size-large&quot; alt=&quot;V6 Wallpaper&quot; data-lightense-background=&quot;#cea761&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A wallpaper goodies for V6. Original title: My V6 Wallpaper</summary></entry><entry><title>My Signature</title><id>https://digitalauthority.com.au//work/my-signature/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/my-signature/" /><published>2005-07-29T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;A signature I used for some time in forums.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/logo_signature.gif&quot; class=&quot;no-resize&quot; alt=&quot;My Signature&quot; data-lightense-background=&quot;#666&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>A signature I used for some time in forums.</summary></entry><entry><title>My Color</title><id>https://digitalauthority.com.au//work/my-color/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/my-color/" /><published>2005-07-18T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Five different emotions, created by Painter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/my_color.jpg&quot; class=&quot;size-large&quot; alt=&quot;My Color&quot; data-lightense-background=&quot;#666&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary>Five different emotions, created by Painter.</summary></entry><entry><title>About Design</title><id>https://digitalauthority.com.au//work/about-design/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/about-design/" /><published>2005-07-08T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/about.jpg&quot; alt=&quot;About Design&quot; data-lightense-background=&quot;rgba(102, 102, 102, .96)&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>My Sign</title><id>https://digitalauthority.com.au//work/my-sign/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/my-sign/" /><published>2005-07-03T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/my_sign.jpg&quot; alt=&quot;My Sign&quot; data-lightense-background=&quot;#666&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>My Mid-School</title><id>https://digitalauthority.com.au//work/my-mid-school/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/my-mid-school/" /><published>2005-07-03T00:00:00+08:00</published><updated>2018-11-01T22:01:45+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;&lt;img src=&quot;https://d349cztnlupsuf.cloudfront.net/work/my_mid-school_final.jpg&quot; alt=&quot;My Mid-School&quot; data-lightense-background=&quot;rgba(102, 102, 102, .96)&quot; /&gt;&lt;/p&gt;
+
+          
+          
+        
+      
+        </content><summary></summary></entry><entry><title>7-Zip Chinese Simplified</title><id>https://digitalauthority.com.au//work/7z-chs/</id><link rel="alternate" type="text/html" href="https://digitalauthority.com.au//work/7z-chs/" /><published>2004-11-09T00:00:00+08:00</published><updated>2015-04-21T10:08:01+08:00</updated><author><name>digital</name><uri>https://simondodson.com/</uri><email>simon@rite.io</email></author><content type="html" xml:base="https://digitalauthority.com.au//">
+          
+            &lt;p&gt;Official 7-Zip Chinese Simplified Localization Project.&lt;/p&gt;
+
+          
+          
+        
+          &lt;p&gt;&lt;a href=&quot;/lab/7z/&quot;&gt;&lt;small&gt;◉ Direct Link to Original Site&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;
+        
+      
+        </content><summary>Official 7-Zip Chinese Simplified Localization Project</summary></entry></feed>

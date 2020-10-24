@@ -1,7 +1,4 @@
----
----
-Sitemap: {{ "/sitemap.xml" | absolute_url }}
+Sitemap: https://digitalauthority.com.au//sitemap.xml
 
-{% for post in site.robots -%}
-  {{ post | strip }}
-{% endfor -%}
+User-agent: *
+Disallow: /lab/version/
